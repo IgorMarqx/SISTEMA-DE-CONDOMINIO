@@ -9,12 +9,14 @@
 
                     <div class="card-body">
                         <form method="POST" action="">
+                            <input type="hidden" name="_token" :value="token_csrf">
 
                             <div class="row mb-3">
                                 <label for="email" class="col-md-4 col-form-label text-md-end">E-mail</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" required autocomplete="email" autofocus>
+                                    <input id="email" type="email" class="form-control" required autocomplete="email"
+                                        autofocus>
 
                                     <span class="invalid-feedback" role="alert">
                                         <strong></strong>
@@ -26,9 +28,8 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-end">Senha</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password"
-                                        class="form-control" name="password"
-                                        required autocomplete="current-password">
+                                    <input id="password" type="password" class="form-control" name="password" required
+                                        autocomplete="current-password">
 
                                     <span class="invalid-feedback" role="alert">
                                         <strong></strong>
@@ -68,5 +69,9 @@
 </template>
 
 <script>
-
+export default {
+    props: [
+        'token_csrf'
+    ]
+}
 </script>
