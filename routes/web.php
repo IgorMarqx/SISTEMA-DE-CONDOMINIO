@@ -1,10 +1,8 @@
 <?php
 
+use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('log', [HomeController::class, 'log'])->name('log');
+Route::get('/', [AuthController::class, 'index'])->name('login');
+Route::post('login', [HomeController::class, 'login_action'])->name('login_action');
