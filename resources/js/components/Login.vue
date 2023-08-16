@@ -8,7 +8,7 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" @submit.prevent="login($event)">
                             <input type="hidden" name="_token" :value="token_csrf">
 
                             <div class="row mb-3">
@@ -72,6 +72,26 @@
 export default {
     props: [
         'token_csrf'
-    ]
+    ],
+    data() {
+        return {
+
+        }
+    },
+    methods: {
+        login(e) {
+            let url = '';
+            let config = {
+                method: 'POST',
+                body: {
+                    'email': '',
+                    'password': '',
+                }
+            }
+
+            fetch(url, config)
+        }
+    }
+
 }
 </script>
