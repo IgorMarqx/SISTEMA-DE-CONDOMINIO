@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\AuthApiRequest;
 use Illuminate\Http\Request;
 
 class ApiAuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(AuthApiRequest $request)
     {
         $array = ['error' => ''];
 
-        $teste = $request->input('email');
+        $validate = $request->validate();
+        $validate = $request->safe()->only(['email', 'password']);
 
-        $array['email'] = $teste;
+        $array['email'] = $validate;
 
         return $array;
     }
