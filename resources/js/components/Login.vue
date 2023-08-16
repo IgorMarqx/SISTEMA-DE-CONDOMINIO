@@ -8,12 +8,12 @@
                 <div class="form-group">
                     <div class="flex flex-col">
                         <label for="email" class="">E-mail</label>
-                        <input type="text" id="email" class="border border rounded border-sky-500 w-full text-sm p-2">
+                        <input type="text" id="email" name="email" class="border border rounded border-sky-500 w-full text-sm p-2">
                     </div>
 
                     <div class="flex flex-col mt-4 mb-4">
-                        <label for="email" class="">Senha</label>
-                        <input type="text" id="email" class="border border rounded border-sky-500 w-full text-sm p-2">
+                        <label for="password" class="">Senha</label>
+                        <input type="text" id="password" name="password" class="border border rounded border-sky-500 w-full text-sm p-2">
                     </div>
 
                     <div class="flex flex-col">
