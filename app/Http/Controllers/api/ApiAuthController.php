@@ -3,19 +3,25 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\api\AuthApiRequest;
+use App\Http\Requests\ApiAuthRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ApiAuthController extends Controller
 {
-    public function login(AuthApiRequest $request)
+    public function login(Request $request)
     {
         $array = ['error' => ''];
 
-        $validate = $request->validate();
-        $validate = $request->safe()->only(['email', 'password']);
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'password']
+        ]);
 
-        $array['email'] = $validate;
+        if($validator->fails()){
+            $array['error'] = $validator->errors()->first();
+            return $array;
+        }
 
         return $array;
     }
