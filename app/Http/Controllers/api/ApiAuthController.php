@@ -53,4 +53,11 @@ class ApiAuthController extends Controller
         return $array;
     }
 
+    public function validator($data)
+    {
+        return $validator = Validator::make($data, [
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:5']
+        ]);
+    }
 }
