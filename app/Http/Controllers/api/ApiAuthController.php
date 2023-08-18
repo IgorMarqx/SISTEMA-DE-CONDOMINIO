@@ -42,4 +42,15 @@ class ApiAuthController extends Controller
         return $array;
     }
 
+    public function register(Request $request): array
+    {
+        $array = ['error' => ''];
+
+        $credentials = $request->only(['email', 'password']);
+
+        $validator = $this->validator($credentials);
+
+        return $array;
+    }
+
 }
