@@ -18,8 +18,9 @@ class ApiAuthController extends Controller
             'password' => ['required', 'min:4']
         ]);
 
-        if($validator->fails()){
-            $array['error'] = $validator->errors()->first();
+        if ($validator->fails()) {
+            $array['error'] = true;
+            $array['message'] = $validator->errors()->first();
             return $array;
         }
 
