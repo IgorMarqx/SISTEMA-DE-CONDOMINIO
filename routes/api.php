@@ -9,5 +9,7 @@ Route::get('/ping', function () {
 });
 
 Route::post('/auth/login', [ApiAuthController::class, 'login'])->name('login');
+
 Route::middleware('auth:api')->group(function () {
+    Route::post('/auth/register', [ApiAuthController::class, 'register'])->name('register');
 });
