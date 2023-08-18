@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +49,28 @@ class ApiAuthController extends Controller
 
         $credentials = $request->only(['email', 'password']);
 
-        $validator = $this->validator($credentials);
+        $validator = Validator::make($credentials, [
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'min:5']
+        ]);
+
+        if ($validator->fails()) {
+            $array['error'] = true;
+            $array['message'] = $validator->errors()->first();
+            return $array;
+        }
+
+        $user = User::create([
+            'name' => 'aleatorio',
+            'email' => $credentials['email'],
+            'password' => Hash::make($credentials['password']),
+        ]);
+        $user->save();
+
+        if ($user) {
+            $array['message'] = 'Cadastrado com sucesso!';
+            return $array;
+        }
 
         return $array;
     }
