@@ -6,8 +6,7 @@
 
 import './bootstrap';
 import { createApp } from 'vue';
-import VueSweetalert2 from 'vue-sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
+import { createRouter, createWebHistory } from 'vue-router';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -16,13 +15,26 @@ import 'sweetalert2/dist/sweetalert2.min.css';
  */
 
 const app = createApp({});
-app.use(VueSweetalert2);
 
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
 import LoginComponent from './components/Login.vue';
 app.component('login-component', LoginComponent);
+
+import HomeComponent from './components/Home.vue';
+app.component('home-component', HomeComponent);
+
+const routes = [
+    { path: '/', component: LoginComponent },
+    { path: '/home', component: HomeComponent },
+];
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -41,4 +53,6 @@ app.component('login-component', LoginComponent);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
+export default router;
+app.use(router);
 app.mount('#app');
