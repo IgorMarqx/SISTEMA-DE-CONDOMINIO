@@ -81,7 +81,12 @@ export default {
                     if (data.token) {
                         document.cookie = 'token=' + data.token + ';SameSite=Lax'
                         e.target.submit()
+
+                        if (data.redirect) {
+                            this.$router.push(data.redirect)
+                        }
                     }
+
                 })
                 .catch(error => {
                     console.log('Erro na requisição', error)
