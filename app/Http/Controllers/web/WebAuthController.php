@@ -11,4 +11,9 @@ class WebAuthController extends Controller
     {
         return view('auth.login');
     }
+
+    public function home()
+    {
+        dd('testree');
+    }
 }
