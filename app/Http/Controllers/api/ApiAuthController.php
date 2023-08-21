@@ -34,7 +34,8 @@ class ApiAuthController extends Controller
         ]);
 
         if (!$token) {
-            $array['error'] = 'E-mail ou senha inválido.';
+            $array['error'] = true;
+            $array['message'] = 'E-mail ou senha inválido.';
             return $array;
         }
 
@@ -47,9 +48,10 @@ class ApiAuthController extends Controller
     {
         $array = ['error' => ''];
 
-        $credentials = $request->only(['email', 'password']);
+        $credentials = $request->only(['name', 'email', 'password']);
 
         $validator = Validator::make($credentials, [
+            'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'min:5']
         ]);
@@ -61,7 +63,7 @@ class ApiAuthController extends Controller
         }
 
         $user = User::create([
-            'name' => 'aleatorio',
+            'name' => $credentials['name'],
             'email' => $credentials['email'],
             'password' => Hash::make($credentials['password']),
         ]);
