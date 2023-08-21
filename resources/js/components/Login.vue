@@ -60,7 +60,7 @@ export default {
             })
         },
         login(e) {
-            let url = 'http://127.0.0.1:8000/api/auth/login';
+            let url = '/api/auth/login';
             let config = {
                 method: 'POST',
                 body: new URLSearchParams({
@@ -83,7 +83,7 @@ export default {
                         e.target.submit()
 
                         if (data.redirect) {
-                            this.$router.push('/' + data.redirect)
+                            this.$router.push(data.redirect)
                         }
                     }
 
