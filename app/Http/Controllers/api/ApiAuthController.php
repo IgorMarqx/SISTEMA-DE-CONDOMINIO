@@ -34,12 +34,11 @@ class ApiAuthController extends Controller
         ]);
 
         if (!$token) {
-            $array['error'] = true;
-            $array['message'] = 'E-mail ou senha inválido.';
-            return $array;
+            return ['error' => true, 'message' => 'E-mail ou senha inválidos!'];
         }
 
         $array['token'] = $token;
+        $array['redirect'] = '/home';
 
         return $array;
     }

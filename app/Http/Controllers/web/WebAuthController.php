@@ -14,6 +14,6 @@ class WebAuthController extends Controller
 
     public function home()
     {
-        dd('testree');
+        dd('teste');
     }
 }
