@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\api\ApiAuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', function () {
