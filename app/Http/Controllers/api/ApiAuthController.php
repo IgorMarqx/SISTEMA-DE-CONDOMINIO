@@ -38,7 +38,7 @@ class ApiAuthController extends Controller
         }
 
         $array['token'] = $token;
-        $array['redirect'] = 'home';
+        $array['redirect'] = '/home';
 
         return $array;
     }
