@@ -27,7 +27,7 @@ app.component('home-component', HomeComponent);
 
 const routes = [
     { path: '/', component: LoginComponent },
-    { path: '/home', component: HomeComponent },
+    { path: '/home', component: HomeComponent, name: 'home' },
 ];
 
 const router = createRouter({
