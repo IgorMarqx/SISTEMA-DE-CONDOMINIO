@@ -16,6 +16,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
  */
 
 const app = createApp({});
+app.use(VueSweetalert2);
 
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
