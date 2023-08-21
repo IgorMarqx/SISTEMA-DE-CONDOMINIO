@@ -83,7 +83,7 @@ export default {
                         e.target.submit()
 
                         if (data.redirect) {
-                            this.$router.push(data.redirect)
+                            this.$router.push('/' + data.redirect)
                         }
                     }
 
