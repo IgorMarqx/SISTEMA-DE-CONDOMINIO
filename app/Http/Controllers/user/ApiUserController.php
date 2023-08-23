@@ -4,7 +4,9 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApiUserController extends Controller
 {
@@ -28,12 +30,27 @@ class ApiUserController extends Controller
         //
     }
 
+
+    public function edit(string $id)
+    {
+        $array = ['error' => ''];
+
+        $user = User::find($id);
+
+        if (!$user) {
+            $array['error'] = true;
+            $array['message'] = 'Usuário não encontrado.';
+            return $array;
+        }
+
+        return response()->json($user);
+    }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd('teste');
     }
 
     /**
