@@ -46,12 +46,13 @@ class ApiAuthController extends Controller
     {
         $array = ['error' => ''];
 
-        $credentials = $request->only(['name', 'email', 'password']);
+        $credentials = $request->only(['name', 'email', 'password', 'password_confirmation']);
 
         $validator = Validator::make($credentials, [
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'min:5']
+            'password' => ['required_with:password_confirmation', 'same:password_confirmation', 'min:5', 'confirmed'],
+            'password_confirmation' => ['min:5'],
         ]);
 
         if ($validator->fails()) {
