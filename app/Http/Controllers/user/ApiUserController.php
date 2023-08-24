@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,36 +13,54 @@ use Illuminate\Support\Facades\Validator;
 class ApiUserController extends Controller
 {
 
-    public function index(User $user): array
+    private $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
+    public function index(User $user): object
     {
         $array = ['error' => ''];
 
         if ($user) {
-            $array['users'] = $user->get(['id', 'name', 'email', 'created_at', 'updated_at']);
+            $array['users'] = $this->userRepository->allUsers();
+            return response()->json(['users' => $array]);
         }
 
-        return $array;
+        return response()->json(['error' => 'true'], 204);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
-
-
-    public function edit(string $id)
+    public function show(string $id): object
     {
         $array = ['error' => ''];
 
-        $user = User::find($id);
+        $user = $this->userRepository->findUserById($id);
+
+        if (!$user) {
+            $array['error'] = true;
+            $array['message'] = 'Usuário não encontrado';
+            return response()->json($array);
+        }
+
+        return response()->json($user);
+    }
+
+
+    public function edit(string $id): object
+    {
+        $array = ['error' => ''];
+
+        $user = $this->userRepository->findUserById($id);
 
         if (!$user) {
             $array['error'] = true;
             $array['message'] = 'Usuário não encontrado.';
-            return $array;
+            return response()->json($array);
         }
 
         return response()->json($user);
@@ -49,16 +68,16 @@ class ApiUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): object
     {
         $array = ['error' => ''];
 
-        $user = User::find($id);
+        $user = $this->userRepository->findUserById($id);
 
         if (!$user) {
             $array['error'] = true;
             $array['message'] = 'Usuário não existe.';
-            return $array;
+            return response()->json($array);
         }
 
         $credentials = $request->only(['name', 'email', 'password', 'password_confirmation']);
@@ -68,42 +87,38 @@ class ApiUserController extends Controller
         if ($validator->fails()) {
             $array['error'] = true;
             $array['message'] = $validator->errors()->first();
-            return $array;
+            return response()->json($array);
         }
 
-        $user->name = $credentials['name'];
-        $user->email = $credentials['email'];
-        $user->password = $credentials['password'];
-        $user->touch();
-        $user->save();
+        $this->userRepository->updateUser($credentials, $id);
 
         $array['message'] = 'Usuário editado com sucesso.';
 
-        return $array;
+        return response()->json($array);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): object
     {
         $array = ['error' => ''];
 
-        $user = User::find($id);
+        $user = $this->userRepository->findUserById($id);
 
         if (!$user) {
             $array['error'] = true;
             $array['message'] = 'Usuário não encontrado.';
-            return $array;
+            return response()->json($array);
         }
 
-        $user->delete();
+       $this->userRepository->destroyUser($id);
         $array['message'] = 'Usuário deletado com sucesso.';
 
-        return $array;
+        return response()->json($array);
     }
 
-    public function validator($data)
+    public function validator($data): object
     {
         return $validator = Validator::make($data, [
             'name' => ['required'],
