@@ -5,10 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use DateTime;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UserRequest;
 
 class ApiUserController extends Controller
 {
@@ -37,8 +34,6 @@ class ApiUserController extends Controller
      */
     public function show(string $id): object
     {
-        $array = ['error' => ''];
-
         $user = $this->userRepository->findUserById($id);
 
         return response()->json($user);
@@ -47,8 +42,6 @@ class ApiUserController extends Controller
 
     public function edit(string $id): object
     {
-        $array = ['error' => ''];
-
         $user = $this->userRepository->findUserById($id);
 
         return response()->json($user);
@@ -56,7 +49,7 @@ class ApiUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): object
+    public function update(UserRequest $request, string $id): object
     {
         $array = ['error' => ''];
 
@@ -67,17 +60,7 @@ class ApiUserController extends Controller
             return response()->json($user);
         }
 
-        $credentials = $request->only(['name', 'email', 'password', 'password_confirmation']);
-
-        $validator = $this->validator($credentials);
-
-        if ($validator->fails()) {
-            $array['error'] = true;
-            $array['message'] = $validator->errors()->first();
-            return response()->json($array);
-        }
-
-        $this->userRepository->updateUser($credentials, $id);
+        $this->userRepository->updateUser($request, $id);
 
         $array['message'] = 'Usuário editado com sucesso.';
 
@@ -102,15 +85,5 @@ class ApiUserController extends Controller
         $array['message'] = 'Usuário deletado com sucesso.';
 
         return response()->json($array);
-    }
-
-    public function validator($data): object
-    {
-        return $validator = Validator::make($data, [
-            'name' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required_with:password_confirmation', 'same:password_confirmation', 'min:5', 'confirmed'],
-            'password_confirmation' => ['min:5'],
-        ]);
     }
 }
