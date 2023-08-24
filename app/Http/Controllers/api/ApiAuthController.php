@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiAuthController extends Controller
 {
-    public function login(Request $request): array
+    public function login(Request $request): object
     {
         $array = ['error' => ''];
 
@@ -22,7 +22,7 @@ class ApiAuthController extends Controller
         if ($validator->fails()) {
             $array['error'] = true;
             $array['message'] = $validator->errors()->first();
-            return $array;
+            return response()->json($array);
         }
 
         $email = $request->input('email');
@@ -34,15 +34,15 @@ class ApiAuthController extends Controller
         ]);
 
         if (!$token) {
-            return ['error' => true, 'message' => 'E-mail ou senha inválidos!'];
+            return response()->json(['error' => true, 'message' => 'E-mail ou senha inválidos!']);
         }
 
         $array['token'] = $token;
 
-        return $array;
+        return response()->json($array);
     }
 
-    public function register(Request $request): array
+    public function register(Request $request): object
     {
         $array = ['error' => ''];
 
@@ -58,7 +58,7 @@ class ApiAuthController extends Controller
         if ($validator->fails()) {
             $array['error'] = true;
             $array['message'] = $validator->errors()->first();
-            return $array;
+            return response()->json($array);
         }
 
         $user = User::create([
@@ -70,13 +70,13 @@ class ApiAuthController extends Controller
 
         if ($user) {
             $array['message'] = 'Cadastrado com sucesso!';
-            return $array;
+            return response()->json($array);
         }
 
-        return $array;
+        return response()->json($array);
     }
 
-    public function validator($data)
+    public function validator($data): object
     {
         return $validator = Validator::make($data, [
             'email' => ['required', 'email'],
