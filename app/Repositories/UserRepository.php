@@ -20,19 +20,24 @@ class UserRepository implements UserRepositoryInterface
 
     public function findUserById($id): object
     {
-        return User::find($id);
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json(['error' => true, 'message' => 'Usuário não encontrado']);
+        }
+        return $user;
     }
 
     public function updateUser($user, $id): void
     {
-        $user = User::where('id', $id)->first();
-        $user->name = $user['name'];
-        $user->email = $user['email'];
-        $user->password = Hash::make($user['password']);
-        $user->save();
+        $userUpdate = User::where('id', $id)->first();
+        $userUpdate->name = $user['name'];
+        $userUpdate->email = $user['email'];
+        $userUpdate->password = Hash::make($user['password']);
+        $userUpdate->save();
     }
 
-    public function destroyUser($id):void
+    public function destroyUser($id): void
     {
         $user = User::find($id);
         $user->delete();
