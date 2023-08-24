@@ -41,12 +41,6 @@ class ApiUserController extends Controller
 
         $user = $this->userRepository->findUserById($id);
 
-        if (!$user) {
-            $array['error'] = true;
-            $array['message'] = 'Usuário não encontrado';
-            return response()->json($array);
-        }
-
         return response()->json($user);
     }
 
@@ -56,12 +50,6 @@ class ApiUserController extends Controller
         $array = ['error' => ''];
 
         $user = $this->userRepository->findUserById($id);
-
-        if (!$user) {
-            $array['error'] = true;
-            $array['message'] = 'Usuário não encontrado.';
-            return response()->json($array);
-        }
 
         return response()->json($user);
     }
@@ -73,11 +61,10 @@ class ApiUserController extends Controller
         $array = ['error' => ''];
 
         $user = $this->userRepository->findUserById($id);
+        $userDecode = json_decode($user, true);
 
-        if (!$user) {
-            $array['error'] = true;
-            $array['message'] = 'Usuário não existe.';
-            return response()->json($array);
+        if (!$userDecode) {
+            return response()->json($user);
         }
 
         $credentials = $request->only(['name', 'email', 'password', 'password_confirmation']);
@@ -105,14 +92,13 @@ class ApiUserController extends Controller
         $array = ['error' => ''];
 
         $user = $this->userRepository->findUserById($id);
+        $userDecode = json_decode($user, true);
 
-        if (!$user) {
-            $array['error'] = true;
-            $array['message'] = 'Usuário não encontrado.';
-            return response()->json($array);
+        if (!$userDecode) {
+            return response()->json($user);
         }
 
-       $this->userRepository->destroyUser($id);
+        $this->userRepository->destroyUser($id);
         $array['message'] = 'Usuário deletado com sucesso.';
 
         return response()->json($array);
