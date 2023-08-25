@@ -34,8 +34,8 @@ class UserRequest extends FormRequest
             'email.email' => 'E-mail inválido.',
             'password.required' => 'Preencha o campo senha.',
             'password.same' => 'A senhas não correspondem.',
-            'password.min' => 'A senha tem que ser no minimo 5 caracteres.',
-            'password_confirmation.min' => 'A confirmação tem que ser no minimo 5 caracteres.',
+            'password.min' => 'A senha tem que ter no minimo 5 caracteres.',
+            'password_confirmation.min' => 'A confirmação tem que ter no minimo 5 caracteres.',
         ];
     }
 }
