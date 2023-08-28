@@ -13,9 +13,14 @@ class UserRepository implements UserRepositoryInterface
         return User::all();
     }
 
-    public function storeUser($user): object
+    public function storeUser($user): void
     {
-        return User::create($user);
+        $user = User::create([
+            'name' => $user['name'],
+            'email' => $user['email'],
+            'password' => Hash::make($user['password'])
+        ]);
+        $user->save();
     }
 
     public function findUserById($id): object
