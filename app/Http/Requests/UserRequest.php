@@ -12,8 +12,8 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|same:password_confirmation|min:5',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:5',
             'password_confirmation' => 'min:5',
         ];
     }
@@ -22,7 +22,7 @@ class UserRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json([
             'error' => true,
-                'message' => $validator->errors()
+            'message' => $validator->errors()->first()
         ]));
     }
 
@@ -30,11 +30,15 @@ class UserRequest extends FormRequest
     {
         return [
             'name.required' => 'Preencha o campo nome.',
+
             'email.required' => 'Preencha o campo e-mail.',
             'email.email' => 'E-mail inválido.',
+            'email.unique' => 'E-mail já cadastrado.',
+
             'password.required' => 'Preencha o campo senha.',
-            'password.same' => 'A senhas não correspondem.',
+            'password.confirmed' => 'A senhas não correspondem.',
             'password.min' => 'A senha tem que ter no minimo 5 caracteres.',
+
             'password_confirmation.min' => 'A confirmação tem que ter no minimo 5 caracteres.',
         ];
     }
