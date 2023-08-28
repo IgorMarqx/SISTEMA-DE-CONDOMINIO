@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Http\Requests\UserRequest;
+use PhpParser\JsonDecoder;
 
 class ApiUserController extends Controller
 {
@@ -23,10 +24,10 @@ class ApiUserController extends Controller
 
         if ($user) {
             $array = $this->userRepository->allUsers();
-            return response()->json(['users' => $array]);
+            return response()->json($array);
         }
 
-        return response()->json(['error' => 'true'], 204);
+        return response()->json(['error' => true]);
     }
 
     /**
@@ -35,8 +36,13 @@ class ApiUserController extends Controller
     public function show(string $id): object
     {
         $user = $this->userRepository->findUserById($id);
+        $userDecode = json_decode($user, true);
 
-        return response()->json($user);
+        if (!$userDecode) {
+            return response()->json(['error' => true, 'message' => $user]);
+        }
+
+        return response()->json(['error' => '', 'message' => $user]);
     }
 
 
