@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Http\Requests\UserRequest;
-use PhpParser\JsonDecoder;
 
 class ApiUserController extends Controller
 {
@@ -16,6 +15,7 @@ class ApiUserController extends Controller
     public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
+        $this->middleware('api.auth');
     }
 
     public function index(User $user): object
