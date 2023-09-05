@@ -17,8 +17,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('condominium_id');
+            $table->unsignedBigInteger('apartment_id');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('condominium_id')->references('id')->on('condominiums');
+            $table->foreign('apartment_id')->references('id')->on('apartments');
         });
     }
 
