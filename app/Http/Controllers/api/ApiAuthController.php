@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthRequest;
 use App\Http\Requests\UserRequest;
 use App\Repositories\Interfaces\AuthRepositoryInterface;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class ApiAuthController extends Controller
         return response()->json($token);
     }
 
-    public function register(UserRequest $request): object
+    public function register(AuthRequest $request): object
     {
         $user = $this->authRepository->registerUser($request);
 
