@@ -18,7 +18,9 @@ class UserRepository implements UserRepositoryInterface
         $user = User::create([
             'name' => $user['name'],
             'email' => $user['email'],
-            'password' => Hash::make($user['password'])
+            'password' => Hash::make($user['password']),
+            'condominium_id' => $user['condominium_id'],
+            'apartment_id' => $user['apartment_id'],
         ]);
         $user->save();
     }
