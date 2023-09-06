@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CondominiumRequest;
 use App\Repositories\Interfaces\CondominiumRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,9 @@ class ApiCondominiumController extends Controller
     public function __construct(CondominiumRepositoryInterface $condominiumRepository)
     {
         return $this->condominiumRepository = $condominiumRepository;
+        $this->middleware('api.auth');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -21,21 +24,23 @@ class ApiCondominiumController extends Controller
     {
         $condominiums = $this->condominiumRepository->getAll();
 
-        return response()->json($condominiums);
+        return $condominiums;
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CondominiumRequest $request)
     {
-        //
+        $condominium = $this->condominiumRepository->storeCondominium($request);
+
+        return $condominium;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): object
     {
         $condominium = $this->condominiumRepository->findCondominiumById($id);
 
@@ -45,16 +50,28 @@ class ApiCondominiumController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+
+    public function edit(string $id): object
     {
-        //
+        $condominium = $this->condominiumRepository->findCondominiumById($id);
+
+        return $condominium;
+    }
+
+    public function update(CondominiumRequest $request, string $id): object
+    {
+        $condominium = $this->condominiumRepository->updateCondominium($request, $id);
+
+        return $condominium;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): object
     {
-        //
+        $condominium = $this->condominiumRepository->deleteCondominium($id);
+
+        return $condominium;
     }
 }
