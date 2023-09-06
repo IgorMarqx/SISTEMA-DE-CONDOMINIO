@@ -3,16 +3,25 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\CondominiumRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ApiCondominiumController extends Controller
 {
+    private $condominiumRepository;
+
+    public function __construct(CondominiumRepositoryInterface $condominiumRepository)
+    {
+        return $this->condominiumRepository = $condominiumRepository;
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): object
     {
-        //
+        $condominiums = $this->condominiumRepository->getAll();
+
+        return response()->json($condominiums);
     }
 
     /**
