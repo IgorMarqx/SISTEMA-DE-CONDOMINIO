@@ -14,31 +14,55 @@ class CondominiumRepository implements CondominiumRepositoryInterface
         return response()->json($condominium);
     }
 
-    public function storeCondominium($data): void
+    public function storeCondominium($data): object
     {
         $condominium = Condominium::create([
             'name' => $data['name'],
             'address' => $data['address'],
         ]);
         $condominium->save();
+
+        if ($condominium) {
+            return response()->json(['error' => '', 'message' => 'Condominio cadastrado com sucesso.']);
+        }
+
+        return response()->json(['error' => true]);
     }
 
     public function findCondominiumById($id): object
     {
         $condominium = Condominium::find($id);
 
-        if(!$condominium){
+        if (!$condominium) {
             return response()->json(['error' => true, 'message' => 'Condominio não encontrado.']);
         }
 
         return $condominium;
     }
 
-    public function updateCondominium(): void
+    public function updateCondominium($data, $id): object
     {
+        $condominium = Condominium::find($id);
+
+        if ($condominium) {
+            $condominium->name = $data['name'];
+            $condominium->address = $data['address'];
+            $condominium->save();
+
+            return response()->json(['error' => '', 'message' => 'Condominio atualizado com sucesso.']);
+        }
+
+        return response()->json(['error' => true, 'message' => 'Condominio não encontrado.']);
     }
 
-    public function deleteCondominium(): void
+    public function deleteCondominium($id): object
     {
+        $condominium = Condominium::find($id);
+
+        if ($condominium) {
+            $condominium->delete();
+        }
+
+        return response()->json(['error' => true, 'message' => 'Condominio não encontrado.']);
     }
 }
