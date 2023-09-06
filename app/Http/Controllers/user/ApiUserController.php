@@ -36,11 +36,6 @@ class ApiUserController extends Controller
     public function show(string $id): object
     {
         $user = $this->userRepository->findUserById($id);
-        $userDecode = json_decode($user, true);
-
-        if (!$userDecode) {
-            return response()->json(['error' => true, 'message' => $user]);
-        }
 
         return response()->json(['error' => '', 'message' => $user]);
     }
