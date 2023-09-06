@@ -19,6 +19,8 @@ Route::middleware(['api.auth'])->group(function () {
     Route::post('/auth/register', [ApiAuthController::class, 'register']);
 
     Route::get('/users/{id}/edit', [ApiUserController::class, 'edit']);
+    Route::get('/condominium/{id}/edit', [ApiCondominiumController::class, 'edit']);
+
     Route::apiResources([
         'users' => ApiUserController::class,
         'condominium' => ApiCondominiumController::class,
