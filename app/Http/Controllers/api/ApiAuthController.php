@@ -15,6 +15,7 @@ class ApiAuthController extends Controller
     public function __construct(AuthRepositoryInterface $authRepository)
     {
         $this->authRepository = $authRepository;
+        $this->middleware('api.auth');
     }
 
     public function login(Request $request): object
