@@ -37,7 +37,9 @@ class ApiCondominiumController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $condominium = $this->condominiumRepository->findCondominiumById($id);
+
+        return $condominium;
     }
 
     /**
