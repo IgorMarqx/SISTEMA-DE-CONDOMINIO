@@ -9,9 +9,7 @@ class CondominiumRepository implements CondominiumRepositoryInterface
 {
     public function getAll(): object
     {
-        $condominium = Condominium::all();
-
-        return response()->json($condominium);
+        return Condominium::all();
     }
 
     public function storeCondominium($data): object
@@ -22,11 +20,7 @@ class CondominiumRepository implements CondominiumRepositoryInterface
         ]);
         $condominium->save();
 
-        if ($condominium) {
-            return response()->json(['error' => '', 'message' => 'Condominio cadastrado com sucesso.']);
-        }
-
-        return response()->json(['error' => true]);
+        return response()->json(['error' => '', 'message' => 'Condominio cadastrado com sucesso.'], 201);
     }
 
     public function findCondominiumById($id): object
@@ -34,7 +28,7 @@ class CondominiumRepository implements CondominiumRepositoryInterface
         $condominium = Condominium::find($id);
 
         if (!$condominium) {
-            return response()->json(['error' => true, 'message' => 'Condominio não encontrado.']);
+            return response()->json(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
         }
 
         return $condominium;
@@ -49,10 +43,10 @@ class CondominiumRepository implements CondominiumRepositoryInterface
             $condominium->address = $data['address'];
             $condominium->save();
 
-            return response()->json(['error' => '', 'message' => 'Condominio atualizado com sucesso.']);
+            return response()->json(['error' => '', 'message' => 'Condominio atualizado com sucesso.'], 201);
         }
 
-        return response()->json(['error' => true, 'message' => 'Condominio não encontrado.']);
+        return response()->json(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
     }
 
     public function deleteCondominium($id): object
@@ -63,6 +57,6 @@ class CondominiumRepository implements CondominiumRepositoryInterface
             $condominium->delete();
         }
 
-        return response()->json(['error' => true, 'message' => 'Condominio não encontrado.']);
+        return response()->json(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
     }
 }
