@@ -5,7 +5,6 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CondominiumRequest;
 use App\Repositories\Interfaces\CondominiumRepositoryInterface;
-use Illuminate\Http\Request;
 
 class ApiCondominiumController extends Controller
 {
@@ -28,7 +27,7 @@ class ApiCondominiumController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CondominiumRequest $request)
+    public function store(CondominiumRequest $request): object
     {
         return $this->condominiumRepository->storeCondominium($request);
     }
