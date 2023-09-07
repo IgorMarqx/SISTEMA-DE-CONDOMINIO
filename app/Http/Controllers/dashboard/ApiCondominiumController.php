@@ -13,7 +13,7 @@ class ApiCondominiumController extends Controller
 
     public function __construct(CondominiumRepositoryInterface $condominiumRepository)
     {
-        return $this->condominiumRepository = $condominiumRepository;
+        $this->condominiumRepository = $condominiumRepository;
         $this->middleware('api.auth');
     }
 
@@ -22,9 +22,7 @@ class ApiCondominiumController extends Controller
      */
     public function index(): object
     {
-        $condominiums = $this->condominiumRepository->getAll();
-
-        return $condominiums;
+        return $this->condominiumRepository->getAll();
     }
 
     /**
@@ -32,9 +30,7 @@ class ApiCondominiumController extends Controller
      */
     public function store(CondominiumRequest $request)
     {
-        $condominium = $this->condominiumRepository->storeCondominium($request);
-
-        return $condominium;
+        return $this->condominiumRepository->storeCondominium($request);
     }
 
     /**
@@ -42,9 +38,7 @@ class ApiCondominiumController extends Controller
      */
     public function show(string $id): object
     {
-        $condominium = $this->condominiumRepository->findCondominiumById($id);
-
-        return $condominium;
+        return $this->condominiumRepository->findCondominiumById($id);
     }
 
     /**
@@ -53,16 +47,12 @@ class ApiCondominiumController extends Controller
 
     public function edit(string $id): object
     {
-        $condominium = $this->condominiumRepository->findCondominiumById($id);
-
-        return $condominium;
+        return $this->condominiumRepository->findCondominiumById($id);
     }
 
     public function update(CondominiumRequest $request, string $id): object
     {
-        $condominium = $this->condominiumRepository->updateCondominium($request, $id);
-
-        return $condominium;
+        return $this->condominiumRepository->updateCondominium($request, $id);
     }
 
     /**
@@ -70,8 +60,6 @@ class ApiCondominiumController extends Controller
      */
     public function destroy(string $id): object
     {
-        $condominium = $this->condominiumRepository->deleteCondominium($id);
-
-        return $condominium;
+        return $this->condominiumRepository->deleteCondominium($id);
     }
 }
