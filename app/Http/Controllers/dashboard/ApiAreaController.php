@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AreaRequest;
 use App\Repositories\Interfaces\AreaRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -27,17 +28,17 @@ class ApiAreaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AreaRequest $request): object
     {
-        //
+        return $this->areaRepository->storeArea($request);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id):object
     {
-        //
+        return $this->areaRepository->findAreaById($id);
     }
 
     /**
