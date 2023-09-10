@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Area;
 use App\Models\Condominium;
 use App\Repositories\Interfaces\CondominiumRepositoryInterface;
 
@@ -23,15 +24,18 @@ class CondominiumRepository implements CondominiumRepositoryInterface
         return response()->json(['error' => '', 'message' => 'Condominio cadastrado com sucesso.'], 201);
     }
 
-    public function findCondominiumById($id): object
+    public function findCondominiumById($id): \Illuminate\Http\JsonResponse
     {
-        $condominium = Condominium::find($id);
+        $condominium = [
+            'condominium' => Condominium::find($id),
+            'area' => Area::where('condominium_id', $id)->get(),
+        ];
 
-        if (!$condominium) {
+        if (!$condominium['condominium']) {
             return response()->json(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
         }
 
-        return $condominium;
+        return response()->json(['error' => '', 'condominium' => $condominium['condominium'], 'area' => $condominium['area']]);
     }
 
     public function updateCondominium($data, $id): object
