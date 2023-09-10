@@ -12,8 +12,10 @@ class AreaRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'condominium_id' => 'required',
-            'operations_id' => 'required'
+            'days' => 'required|date_format:Y-m-d',
+            'start_time' => 'required|date_format:H:i:s',
+            'end_time' => 'required|date_format:H:i:s',
+            'condominium_id' => 'required|numeric',
         ];
     }
 
