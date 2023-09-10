@@ -16,7 +16,9 @@ class Area extends Model
 
     protected $fillable = [
         'name',
+        'days',
+        'start_time',
+        'end_time',
         'condominium_id',
-        'operations_id'
     ];
 }
