@@ -11,7 +11,7 @@ class AreaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:areas',
+            'name' => 'required',
             'days' => 'required|date_format:Y-m-d',
             'start_time' => 'required|date_format:H:i:s',
             'end_time' => 'required|date_format:H:i:s',
