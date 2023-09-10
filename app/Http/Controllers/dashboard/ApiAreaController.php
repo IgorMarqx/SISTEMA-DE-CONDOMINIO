@@ -36,7 +36,7 @@ class ApiAreaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id):object
+    public function show(string $id): object
     {
         return $this->areaRepository->findAreaById($id);
     }
@@ -44,16 +44,16 @@ class ApiAreaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AreaRequest $request, string $id): object
     {
-        //
+        return $this->areaRepository->updateArea($request, $id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): object
     {
-        //
+        return $this->areaRepository->deleteArea($id);
     }
 }
