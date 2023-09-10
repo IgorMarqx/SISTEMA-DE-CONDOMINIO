@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->date('days');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->unsignedBigInteger('condominium_id');
-            $table->unsignedBigInteger('operations_id');
             $table->timestamps();
 
             $table->foreign('condominium_id')->references('id')->on('condominiums');
-            $table->foreign('operations_id')->references('id')->on('operations');
         });
     }
 
