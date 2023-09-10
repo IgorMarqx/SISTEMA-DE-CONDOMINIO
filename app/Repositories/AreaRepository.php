@@ -16,8 +16,10 @@ class AreaRepository implements AreaRepositoryInterface
     {
         $area = Area::create([
             'name' => $data['name'],
+            'days' => $data['days'],
+            'start_time' => $data['start_time'],
+            'end_time' => $data['end_time'],
             'condominium_id' => $data['condominium_id'],
-            'operations_id' => $data['operations_id'],
         ]);
         $area->save();
 
@@ -59,7 +61,8 @@ class AreaRepository implements AreaRepositoryInterface
             return response()->json(['error' => true, 'message' => 'Area não encontrada.'], 404);
         }
 
-        return response()->json($area);
+        $area->delete($id);
+        return response()->json(['error' => '', 'message' => 'Área deletada com sucesso.']);
     }
 
 }
