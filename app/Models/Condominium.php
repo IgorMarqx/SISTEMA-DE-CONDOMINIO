@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Condominium extends Model
 {
@@ -16,4 +17,9 @@ class Condominium extends Model
         'address',
         'number',
     ];
+
+    public function area(): HasMany
+    {
+        return $this->hasMany(Area::class);
+    }
 }
