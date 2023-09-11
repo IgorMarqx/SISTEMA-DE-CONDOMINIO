@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
+            $table->integer('allowed')->default(1);
             $table->string('name');
             $table->date('days');
             $table->time('start_time');
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('condominium_id');
             $table->timestamps();
 
-            $table->foreign('condominium_id')->references('id')->on('condominiums');
+            $table->foreign('condominium_id')->references('id')->on('condominiums')->onDelete('cascade');
         });
     }
 
@@ -31,7 +32,6 @@ return new class extends Migration
     {
         Schema::table('areas', function (Blueprint $table) {
             $table->dropForeign(['condominium_id']);
-            $table->dropForeign(['operations_id']);
         });
 
         Schema::dropIfExists('areas');
