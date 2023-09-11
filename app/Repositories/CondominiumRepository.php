@@ -24,18 +24,15 @@ class CondominiumRepository implements CondominiumRepositoryInterface
         return response()->json(['error' => '', 'message' => 'Condominio cadastrado com sucesso.'], 201);
     }
 
-    public function findCondominiumById($id): \Illuminate\Http\JsonResponse
+    public function findCondominiumById($id): object
     {
-        $condominium = [
-            'condominium' => Condominium::find($id),
-            'area' => Area::where('condominium_id', $id)->get(),
-        ];
+        $condominium = Condominium::with('area')->find($id);
 
-        if (!$condominium['condominium']) {
+        if (!$condominium) {
             return response()->json(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
         }
 
-        return response()->json(['error' => '', 'condominium' => $condominium['condominium'], 'area' => $condominium['area']]);
+        return response()->json(['error' => '', 'condominium' => $condominium]);
     }
 
     public function updateCondominium($data, $id): object
@@ -56,9 +53,12 @@ class CondominiumRepository implements CondominiumRepositoryInterface
     public function deleteCondominium($id): object
     {
         $condominium = Condominium::find($id);
+        $area = Area::where('condominium_id', $id);
 
         if ($condominium) {
             $condominium->delete();
+            $area->delete();
+            return response()->json(['error' => '', 'message' => 'Condominio deletado com sucesso.']);
         }
 
         return response()->json(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
