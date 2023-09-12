@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Apartment;
 use App\Models\Condominium;
 use App\Repositories\AreaRepository;
 use App\Repositories\Interfaces\AreaRepositoryInterface;
@@ -37,6 +38,10 @@ class AppServiceProvider extends ServiceProvider
 
         Validator::extend('condominium_exists', function($attribute, $value){
             return Condominium::where('id', $value)->exists();
+        });
+
+        Validator::extend('apartment_exists', function($attribute, $value){
+            return Apartment::where('id', $value)->exists();
         });
     }
 }
