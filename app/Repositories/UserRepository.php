@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function allUsers(): object
+    public function getAll(): object
     {
         return User::all();
     }
