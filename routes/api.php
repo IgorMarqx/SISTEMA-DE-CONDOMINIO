@@ -4,6 +4,7 @@ use App\Http\Controllers\api\ApiAuthController;
 use App\Http\Controllers\dashboard\ApiCondominiumController;
 use App\Http\Controllers\user\ApiUserController;
 use App\Http\Controllers\dashboard\ApiAreaController;
+use App\Http\Controllers\dashboard\ApiApartmentController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,6 @@ Route::middleware(['api.auth'])->group(function () {
         'users' => ApiUserController::class,
         'condominium' => ApiCondominiumController::class,
         'areas' => ApiAreaController::class,
+        'apartment' => ApiApartmentController::class
     ]);
 });
