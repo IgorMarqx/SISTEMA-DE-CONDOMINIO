@@ -16,8 +16,8 @@ class AuthRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:5',
             'password_confirmation' => 'min:5',
-            'condominium_id' => 'required',
-            'apartment_id' => 'required',
+            'condominium_id' => 'required|condominium_exists',
+            'apartment_id' => 'required|apartment_exists',
         ];
     }
 
@@ -46,7 +46,10 @@ class AuthRequest extends FormRequest
             'password_confirmation.min' => 'A confirmação tem que ter no minimo 5 caracteres.',
 
             'condominium_id.required' => 'Escolha um condominio.',
+            'condominium_id.condominium_exists' => 'Condominio Inválido.',
+
             'apartment_id.required' => 'Escolha um apartamento.',
+            'apartment_id.apartment_exists' => 'Apartamento inválido.',
         ];
     }
 }
