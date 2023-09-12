@@ -12,11 +12,19 @@ class AreaDeleteResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+    protected $message;
+
+    public function __construct($message)
+    {
+        parent::__construct($message);
+        return $this->message = $message;
+    }
+
     public function toArray(Request $request): array
     {
         return [
             'error' => '',
-            'message' => 'Área deletada com sucesso.'
+            'message' => $this->message
         ];
     }
 }
