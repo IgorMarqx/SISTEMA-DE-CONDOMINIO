@@ -3,19 +3,23 @@
 namespace App\Repositories;
 
 use App\Http\Resources\areas\AreaDeleteResource;
-use App\Http\Resources\areas\AreaResource;
+use App\Http\Resources\areas\AreaErrorResource;
 use App\Http\Resources\areas\AreaShowResource;
 use App\Http\Resources\areas\AreaUpdateResource;
 use App\Models\Area;
 use App\Repositories\Interfaces\AreaRepositoryInterface;
 use Exception;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\Collection;
 
 class AreaRepository implements AreaRepositoryInterface
 {
-    public function getAll(): object
+    public function getAll(): Collection
     {
-        return Area::all();
+        try {
+            return Area::all();
+        } catch (Exception $e) {
+            throw new Exception('Erro ao listar apartamentos:' . $e->getMessage());
+        }
     }
 
     /**
@@ -35,18 +39,18 @@ class AreaRepository implements AreaRepositoryInterface
         return $area;
     }
 
-    public function findAreaById($id): object
+    public function findAreaById($id): AreaErrorResource|AreaShowResource
     {
         $area = Area::with('condominium')->find($id);
 
         if (!$area) {
-            return response()->json(['error' => true, 'message' => 'Área não encontrada'], 404);
+            return new AreaErrorResource('Área não encontrada');
         }
 
         return new AreaShowResource($area);
     }
 
-    public function updateArea($data, $id): object
+    public function updateArea($data, $id): AreaErrorResource|AreaUpdateResource
     {
         $area = Area::find($id);
 
@@ -60,22 +64,21 @@ class AreaRepository implements AreaRepositoryInterface
                 'condominium_id' => $id
             ]);
 
-            return $area;
+            return new AreaUpdateResource($area);
         }
 
-        return response()->json(['error' => true, 'message' => 'Área não encontrada.'], 404);
+        return new AreaErrorResource('Área não encontrada');
     }
 
-    public function deleteArea($id): JsonResponse
+    public function deleteArea($id): AreaDeleteResource|AreaErrorResource
     {
         $area = Area::find($id);
 
         if (!$area) {
-            return response()->json(['error' => true, 'message' => 'Area não encontrada.'], 404);
+            return new AreaErrorResource('Área não encontrada.');
         }
 
         $area->delete($id);
-        return response()->json(['error' => '', 'message' => 'Área deletada com sucesso.']);
+        return new AreaDeleteResource('Área deletada com sucesso.');
     }
-
 }
