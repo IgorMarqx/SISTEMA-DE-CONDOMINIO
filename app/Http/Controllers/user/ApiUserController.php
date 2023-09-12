@@ -23,7 +23,7 @@ class ApiUserController extends Controller
         $array = ['error' => ''];
 
         if ($user) {
-            $array = $this->userRepository->allUsers();
+            $array = $this->userRepository->getAll();
             return response()->json($array);
         }
 
