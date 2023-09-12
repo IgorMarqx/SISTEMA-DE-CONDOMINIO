@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CondominiumRequest;
+use App\Http\Requests\condominiums\CondominiumRequest;
 use App\Repositories\Interfaces\CondominiumRepositoryInterface;
 
 class ApiCondominiumController extends Controller
