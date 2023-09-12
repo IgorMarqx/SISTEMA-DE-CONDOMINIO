@@ -5,8 +5,10 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\areas\AreaCreateRequest;
 use App\Http\Requests\areas\AreaUpdateRequest;
+use App\Http\Resources\areas\AreaErrorResource;
 use App\Http\Resources\areas\AreaResource;
 use App\Http\Resources\areas\AreaUpdateResource;
+use App\Models\Area;
 use App\Repositories\Interfaces\AreaRepositoryInterface;
 
 class ApiAreaController extends Controller
@@ -48,11 +50,9 @@ class ApiAreaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(AreaUpdateRequest $request, string $id): AreaUpdateResource
+    public function update(AreaUpdateRequest $request, string $id): AreaUpdateResource|AreaErrorResource
     {
-        $area = $this->areaRepository->updateArea($request, $id);
-
-        return new AreaUpdateResource($area);
+        return $this->areaRepository->updateArea($request, $id);
     }
 
     /**
