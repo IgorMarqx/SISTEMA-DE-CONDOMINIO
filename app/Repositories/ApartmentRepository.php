@@ -35,7 +35,7 @@ class ApartmentRepository implements ApartmentRepositoryInterface
         ]);
 
         try {
-            return new ApiResource(false, 'Apartamento criado com sucesso');
+            return new ApiResource(['error' => false, 'message' => 'Apartamento criado com sucesso'], 201);
         } catch (Exception $e) {
             throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
         }
@@ -49,7 +49,7 @@ class ApartmentRepository implements ApartmentRepositoryInterface
         $apartment = Apartment::with('garage')->find($id);
 
         if (!$apartment) {
-            return new ApiResource(true, 'Apartamento não encontrado');
+            return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
         }
 
         try {
@@ -73,10 +73,10 @@ class ApartmentRepository implements ApartmentRepositoryInterface
                     'condominium_id' => $data->condominium_id,
                 ]);
 
-                return new ApiResource(false, 'Apartamento atualizado com sucesso');
+                return new ApiResource(['error' => false, 'message' => 'Apartamento atualizado com sucesso'], 200);
             }
 
-            return new ApiResource(true, 'Apartamento não encontrado');
+            return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
         } catch (Exception $e) {
             throw new Exception('Ocorreu um erro: ' . $e->getMessage());
         }
@@ -91,11 +91,11 @@ class ApartmentRepository implements ApartmentRepositoryInterface
 
         try {
             if (!$apartment) {
-                return new ApiResource(true, 'Apartamento não encontrado');
+                return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
             }
 
             $apartment->delete();
-            return new ApiResource(false, 'Apartamento deletado com sucesso');
+            return new ApiResource(['error' => false, 'message' => 'Apartamento deletado com sucesso'], 200);
         } catch (Exception $e) {
             throw new Exception('Ocorreu um erro: ' . $e->getMessage());
         }
