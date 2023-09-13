@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ApiAuthController extends Controller
 {
-    private $authRepository;
+    private AuthRepositoryInterface $authRepository;
 
     public function __construct(AuthRepositoryInterface $authRepository)
     {
