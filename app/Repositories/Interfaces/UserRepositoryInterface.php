@@ -2,11 +2,15 @@
 
 namespace App\Repositories\Interfaces;
 
+use App\Http\Resources\ApiResource;
+use App\Http\Resources\user\UserShowResource;
+use Illuminate\Database\Eloquent\Collection;
+
 interface UserRepositoryInterface
 {
-    public function getAll(): object;
-    public function storeUser($user): void;
-    public function findUserById($id);
-    public function updateUser($user, $id): void;
-    public function destroyUser($id): void;
+    public function getAll(): Collection;
+    public function storeUser($data): ApiResource;
+    public function findUserById($id): ApiResource|UserShowResource;
+    public function updateUser($data, $id): ApiResource;
+    public function destroyUser($id): ApiResource;
 }
