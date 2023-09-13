@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ApiResource;
+use App\Http\Resources\user\UserShowResource;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Http\Requests\UserRequest;
+use Illuminate\Database\Eloquent\Collection;
 
 class ApiUserController extends Controller
 {
 
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     public function __construct(UserRepositoryInterface $userRepository)
     {
@@ -18,54 +21,31 @@ class ApiUserController extends Controller
         $this->middleware('api.auth');
     }
 
-    public function index(User $user): object
+    public function index(): Collection
     {
-        $array = ['error' => ''];
-
-        if ($user) {
-            $array = $this->userRepository->getAll();
-            return response()->json($array);
-        }
-
-        return response()->json(['error' => true]);
+        return $this->userRepository->getAll();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id): object
+    public function show(string $id): ApiResource|UserShowResource
     {
-        $user = $this->userRepository->findUserById($id);
-
-        return response()->json(['error' => '', 'message' => $user]);
+        return $this->userRepository->findUserById($id);
     }
 
 
-    public function edit(string $id): object
+    public function edit(string $id): ApiResource|UserShowResource
     {
-        $user = $this->userRepository->findUserById($id);
-
-        return response()->json($user);
+        return $this->userRepository->findUserById($id);
     }
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, string $id): object
+    public function update(UserRequest $request, string $id): ApiResource
     {
-        $array = ['error' => ''];
-
-        $user = $this->userRepository->findUserById($id);
-        $userDecode = json_decode($user, true);
-
-        if (!$userDecode) {
-            return response()->json($user);
-        }
-
-        $this->userRepository->updateUser($request, $id);
-
-        $array['message'] = 'Usuário editado com sucesso.';
-
-        return response()->json($array);
+       return $this->userRepository->updateUser($request, $id);
     }
 
     /**
@@ -73,18 +53,6 @@ class ApiUserController extends Controller
      */
     public function destroy(string $id): object
     {
-        $array = ['error' => ''];
-
-        $user = $this->userRepository->findUserById($id);
-        $userDecode = json_decode($user, true);
-
-        if (!$userDecode) {
-            return response()->json($user);
-        }
-
-        $this->userRepository->destroyUser($id);
-        $array['message'] = 'Usuário deletado com sucesso.';
-
-        return response()->json($array);
+      return $this->userRepository->destroyUser($id);
     }
 }
