@@ -2,26 +2,33 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ApiResource extends JsonResource
 {
-    protected $error;
-    protected $message;
+    protected array $data;
+    protected int $httpCode;
 
-    public function __construct(bool $error, string $message)
+    public function __construct(array $data, $httpCode)
     {
-        parent::__construct($error, $message);
-        $this->error = $error;
-        $this->message = $message;
+        parent::__construct($data);
+        $this->data['error'] = $data['error'];
+        $this->data['message'] = $data['message'];
+        $this->httpCode = $httpCode;
     }
 
     public function toArray(Request $request): array
     {
         return [
-            'error' => $this->error,
-            'message' => $this->message . '.'
+            'error' => $this->data['error'],
+            'message' => $this->data['message'] . '.'
         ];
+    }
+
+    public function withResponse(Request $request, JsonResponse $response): void
+    {
+        $response->setStatusCode($this->httpCode);
     }
 }
