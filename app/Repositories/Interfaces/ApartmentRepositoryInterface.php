@@ -4,10 +4,11 @@ namespace App\Repositories\Interfaces;
 
 use App\Http\Resources\apartments\ApartmentShowResource;
 use App\Http\Resources\ApiResource;
+use Illuminate\Database\Eloquent\Collection;
 
 interface ApartmentRepositoryInterface
 {
-    public function getAll();
+    public function getAll(): Collection;
 
     public function storeApartment($data): ApiResource;
 
