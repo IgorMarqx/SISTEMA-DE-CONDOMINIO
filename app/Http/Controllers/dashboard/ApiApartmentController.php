@@ -5,9 +5,10 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\apartments\ApartmentCreateRequest;
 use App\Http\Requests\apartments\ApartmentUpdateRequest;
+use App\Http\Resources\apartments\ApartmentShowResource;
 use App\Http\Resources\ApiResource;
 use App\Repositories\ApartmentRepository;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 
 class ApiApartmentController extends Controller
 {
@@ -22,7 +23,7 @@ class ApiApartmentController extends Controller
      * Display a listing of the resource.
      * @throws \Exception
      */
-    public function index(): object
+    public function index(): Collection
     {
         return $this->apartmentRepository->getAll();
     }
@@ -40,7 +41,7 @@ class ApiApartmentController extends Controller
      * Display the specified resource.
      * @throws \Exception
      */
-    public function show(string $id): ApiResource
+    public function show(string $id): ApiResource|ApartmentShowResource
     {
         return $this->apartmentRepository->findApartmentById($id);
     }
