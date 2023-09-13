@@ -2,65 +2,104 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\apartments\ApartmentShowResource;
+use App\Http\Resources\ApiResource;
+use App\Http\Resources\condominiums\CondominiumShowResource;
 use App\Models\Area;
 use App\Models\Condominium;
 use App\Repositories\Interfaces\CondominiumRepositoryInterface;
+use Exception;
+use Illuminate\Database\Eloquent\Collection;
 
 class CondominiumRepository implements CondominiumRepositoryInterface
 {
-    public function getAll(): object
+    /**
+     * @throws Exception
+     */
+    public function getAll(): Collection
     {
-        return Condominium::all();
+        try {
+            return Condominium::all();
+        } catch (Exception $e) {
+            throw new Exception('Error: ' . $e->getMessage());
+        }
     }
 
-    public function storeCondominium($data): object
+    /**
+     * @throws Exception
+     */
+    public function storeCondominium($data): ApiResource
     {
-        $condominium = Condominium::create([
+        Condominium::create([
             'name' => $data['name'],
             'address' => $data['address'],
         ]);
-        $condominium->save();
 
-        return response()->json(['error' => '', 'message' => 'Condominio cadastrado com sucesso.'], 201);
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Condominio criado com sucesso'], 201);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
+        }
     }
 
-    public function findCondominiumById($id): object
+    /**
+     * @throws Exception
+     */
+    public function findCondominiumById($id): CondominiumShowResource|ApiResource
     {
         $condominium = Condominium::with('area')->find($id);
 
-        if (!$condominium) {
-            return response()->json(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
-        }
+        try {
+            if (!$condominium) {
+                return new ApiResource(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
+            }
 
-        return response()->json(['error' => '', 'condominium' => $condominium]);
+            return new CondominiumShowResource($condominium);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao encontrar condominio:' . $e->getMessage());
+        }
     }
 
-    public function updateCondominium($data, $id): object
+    /**
+     * @throws Exception
+     */
+    public function updateCondominium($data, $id): ApiResource
     {
         $condominium = Condominium::find($id);
 
-        if ($condominium) {
-            $condominium->name = $data['name'];
-            $condominium->address = $data['address'];
-            $condominium->save();
+        try {
+            if ($condominium) {
+                $condominium->name = $data['name'];
+                $condominium->address = $data['address'];
+                $condominium->save();
 
-            return response()->json(['error' => '', 'message' => 'Condominio atualizado com sucesso.'], 201);
+                return new ApiResource(['error' => '', 'message' => 'Condominio atualizado com sucesso.'], 200);
+            }
+
+            return new ApiResource(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao atualizar/encontrar condominio:' . $e->getMessage());
         }
-
-        return response()->json(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
     }
 
-    public function deleteCondominium($id): object
+    /**
+     * @throws Exception
+     */
+    public function deleteCondominium($id): ApiResource
     {
         $condominium = Condominium::find($id);
         $area = Area::where('condominium_id', $id);
 
-        if ($condominium) {
-            $condominium->delete();
-            $area->delete();
-            return response()->json(['error' => '', 'message' => 'Condominio deletado com sucesso.']);
-        }
+        try {
+            if ($condominium) {
+                $condominium->delete();
+                $area->delete();
+                return new ApiResource(['error' => '', 'message' => 'Condominio deletado com sucesso.'], 200);
+            }
 
-        return response()->json(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
+            return new ApiResource(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao atualizar/encontrar condominio:' . $e->getMessage());
+        }
     }
 }
