@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\areas\AreaCreateRequest;
 use App\Http\Requests\areas\AreaUpdateRequest;
 use App\Http\Resources\ApiResource;
+use App\Http\Resources\areas\AreaShowResource;
 use App\Repositories\Interfaces\AreaRepositoryInterface;
+use \Illuminate\Database\Eloquent\Collection;
 
 class ApiAreaController extends Controller
 {
@@ -21,7 +23,7 @@ class ApiAreaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): object
+    public function index(): Collection
     {
         return $this->areaRepository->getAll();
     }
@@ -37,7 +39,7 @@ class ApiAreaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): object
+    public function show(string $id): ApiResource|AreaShowResource
     {
         return $this->areaRepository->findAreaById($id);
     }
@@ -53,7 +55,7 @@ class ApiAreaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): object
+    public function destroy(string $id): ApiResource
     {
         return $this->areaRepository->deleteArea($id);
     }
