@@ -28,19 +28,20 @@ class AreaRepository implements AreaRepositoryInterface
      */
     public function storeArea($data): ApiResource
     {
-        Area::create([
-            'name' => $data['name'],
-            'days' => $data['days'],
-            'start_time' => $data['start_time'],
-            'end_time' => $data['end_time'],
-            'condominium_id' => $data['condominium_id'],
-            'allowed' => 1
-        ]);
 
         try {
-            return new ApiResource(false, 'Área criada com sucesso');
+            Area::create([
+                'name' => $data['name'],
+                'days' => $data['days'],
+                'start_time' => $data['start_time'],
+                'end_time' => $data['end_time'],
+                'condominium_id' => $data['condominium_id'],
+                'allowed' => 1
+            ]);
+
+            return new ApiResource(['error' => false, 'message' => 'Área criada com sucesso'], 201);
         } catch (Exception $e) {
-            throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
+            throw new Exception('Falha ao criar area:' . $e->getMessage());
         }
     }
 
@@ -52,13 +53,13 @@ class AreaRepository implements AreaRepositoryInterface
         $area = Area::with('condominium')->find($id);
 
         if (!$area) {
-            return new ApiResource(true, 'Área não encontrada');
+            return new ApiResource(['error' => true, 'message' => 'Área não encontrada'], 404);
         }
 
         try {
             return new AreaShowResource($area);
         } catch (Exception $e) {
-            throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
+            throw new Exception('Erro ao criar área:' . $e->getMessage());
         }
     }
 
@@ -80,10 +81,10 @@ class AreaRepository implements AreaRepositoryInterface
                     'condominium_id' => $id
                 ]);
 
-                return new ApiResource(false, 'Área atualizada com sucesso');
+                return new ApiResource(['error' => false, 'message' => 'Área atualizada com sucesso'], 200);
             }
 
-            return new ApiResource(true, 'Área não encontrada');
+            return new ApiResource(['error' => true, 'message' => 'Área não encontrada'], 404);
         } catch (Exception $e) {
             throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
         }
@@ -99,11 +100,11 @@ class AreaRepository implements AreaRepositoryInterface
 
         try {
             if (!$area) {
-                return new ApiResource(true, 'Área não encontrada.');
+                return new ApiResource(['error' => true, 'message' => 'Área não encontrada.'], 404);
             }
 
             $area->delete($id);
-            return new ApiResource(false, 'Área deletada com sucesso.');
+            return new ApiResource(['error' => false, 'message' => 'Área deletada com sucesso.'], 200);
         } catch (Exception $e) {
             throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
         }
