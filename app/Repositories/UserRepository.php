@@ -2,51 +2,107 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\ApiResource;
+use App\Http\Resources\user\UserShowResource;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function getAll(): object
+    /**
+     * @throws Exception
+     */
+    public function getAll(): Collection
     {
-        return User::all();
+        try {
+            return User::all();
+        } catch (Exception $e) {
+            throw new Exception('Erro: ' . $e->getMessage());
+        }
     }
 
-    public function storeUser($user): void
+    /**
+     * @throws Exception
+     */
+    public function storeUser($data): ApiResource
     {
-        $user = User::create([
-            'name' => $user['name'],
-            'email' => $user['email'],
-            'password' => Hash::make($user['password']),
-            'condominium_id' => $user['condominium_id'],
-            'apartment_id' => $user['apartment_id'],
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'condominium_id' => $data['condominium_id'],
+            'apartment_id' => $data['apartment_id'],
         ]);
-        $user->save();
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Usuário criado com sucesso'], 201);
+        } catch (Exception $e) {
+            throw new Exception('Erro: ' . $e->getMessage());
+        }
     }
 
-    public function findUserById($id): object
+    /**
+     * @throws Exception
+     */
+    public function findUserById($id): UserShowResource|ApiResource
     {
         $user = User::find($id);
 
-        if (!$user) {
-            return response()->json(['error' => true, 'message' => 'Usuário não encontrado']);
+        try {
+            if (!$user) {
+                return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
+            }
+
+            return new UserShowResource($user);
+        } catch (Exception $e) {
+            throw new Exception('Erro: ' . $e->getMessage());
         }
-        return $user;
     }
 
-    public function updateUser($user, $id): void
+    /**
+     * @throws Exception
+     */
+    public function updateUser($data, $id): ApiResource
     {
         $userUpdate = User::where('id', $id)->first();
-        $userUpdate->name = $user['name'];
-        $userUpdate->email = $user['email'];
-        $userUpdate->password = Hash::make($user['password']);
-        $userUpdate->save();
+
+        try {
+            if ($userUpdate) {
+                $userUpdate->create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => $data['password'],
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+                return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
+            }
+
+            return new ApiResource(['error' => false, 'message' => 'Usuário atualizado com sucesso'], 200);
+        } catch (Exception $e) {
+            throw new Exception('Erro: ' . $e->getMessage());
+        }
     }
 
-    public function destroyUser($id): void
+    /**
+     * @throws Exception
+     */
+    public function destroyUser($id): ApiResource
     {
         $user = User::find($id);
-        $user->delete();
+
+        try {
+            if ($user) {
+                $user->delete();
+
+                return new ApiResource(['error' => false, 'message' => 'Usuário deletado com sucessp'], 200);
+            }
+
+            return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
+        } catch (Exception $e) {
+            throw new Exception('Erro: ' . $e->getMessage());
+        }
     }
 }
