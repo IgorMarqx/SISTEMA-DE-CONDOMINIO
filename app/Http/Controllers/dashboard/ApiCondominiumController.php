@@ -4,11 +4,14 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\condominiums\CondominiumRequest;
+use App\Http\Resources\ApiResource;
+use App\Http\Resources\condominiums\CondominiumShowResource;
 use App\Repositories\Interfaces\CondominiumRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class ApiCondominiumController extends Controller
 {
-    private $condominiumRepository;
+    private CondominiumRepositoryInterface $condominiumRepository;
 
     public function __construct(CondominiumRepositoryInterface $condominiumRepository)
     {
@@ -19,7 +22,7 @@ class ApiCondominiumController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): object
+    public function index(): Collection
     {
         return $this->condominiumRepository->getAll();
     }
@@ -35,7 +38,7 @@ class ApiCondominiumController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): object
+    public function show(string $id): ApiResource|CondominiumShowResource
     {
         return $this->condominiumRepository->findCondominiumById($id);
     }
@@ -44,7 +47,7 @@ class ApiCondominiumController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function edit(string $id): object
+    public function edit(string $id): ApiResource|CondominiumShowResource
     {
         return $this->condominiumRepository->findCondominiumById($id);
     }
@@ -57,7 +60,7 @@ class ApiCondominiumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): object
+    public function destroy(string $id): ApiResource
     {
         return $this->condominiumRepository->deleteCondominium($id);
     }
