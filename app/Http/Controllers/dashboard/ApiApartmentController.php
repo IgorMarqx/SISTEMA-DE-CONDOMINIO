@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ApiApartmentController extends Controller
 {
-    private $apartmentRepository;
+    private ApartmentRepository $apartmentRepository;
 
     public function __construct(ApartmentRepository $apartmentRepository)
     {
