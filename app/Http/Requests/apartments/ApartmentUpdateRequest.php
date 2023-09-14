@@ -11,7 +11,7 @@ class ApartmentUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'identify' => 'required',
+            'identify' => ['required'],
         ];
     }
 
