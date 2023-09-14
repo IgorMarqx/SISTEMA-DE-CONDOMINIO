@@ -2,14 +2,20 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\ApiResource;
+use App\Http\Resources\auth\TokenResource;
 use App\Models\User;
 use App\Repositories\Interfaces\AuthRepositoryInterface;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthRepository implements AuthRepositoryInterface
 {
-    public function getToken($data): object
+    /**
+     * @throws Exception
+     */
+    public function getToken($data): ApiResource|TokenResource
     {
         $token = Auth::attempt([
             'email' => $data['email'],
@@ -17,15 +23,22 @@ class AuthRepository implements AuthRepositoryInterface
         ]);
 
         if (!$token) {
-            return response()->json(['error' => true, 'message' => 'E-mail ou senha inválidos!']);
+            return new ApiResource(['error' => true, 'message' => 'E-mail ou senha inválidos!'], 422);
         }
 
-        return response()->json(['token' => $token]);
+        try {
+            return new TokenResource($token, 201);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao gerar usuário: ', $e->getMessage());
+        }
     }
 
-    public function registerUser($data): object
+    /**
+     * @throws Exception
+     */
+    public function registerUser($data): ApiResource
     {
-        $user = User::create([
+        User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -33,10 +46,11 @@ class AuthRepository implements AuthRepositoryInterface
             'apartment_id' => $data['apartment_id'],
         ]);
 
-        if ($user) {
-            return response()->json(['message' => 'Cadastrado com sucesso.']);
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Cadastrado com sucesso.'], 201);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao criar usuário: ', $e->getMessage());
         }
 
-        return response()->json(['error' => true]);
     }
 }
