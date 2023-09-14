@@ -34,18 +34,12 @@ class ApiUserController extends Controller
         return $this->userRepository->findUserById($id);
     }
 
-
-    public function edit(string $id): ApiResource|UserShowResource
-    {
-        return $this->userRepository->findUserById($id);
-    }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(UserRequest $request, string $id): ApiResource
     {
-       return $this->userRepository->updateUser($request, $id);
+        return $this->userRepository->updateUser($request, $id);
     }
 
     /**
@@ -53,6 +47,6 @@ class ApiUserController extends Controller
      */
     public function destroy(string $id): object
     {
-      return $this->userRepository->destroyUser($id);
+        return $this->userRepository->destroyUser($id);
     }
 }
