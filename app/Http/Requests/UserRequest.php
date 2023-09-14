@@ -11,10 +11,10 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:5',
-            'password_confirmation' => 'min:5',
+            'name' => ['required'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:5'],
+            'password_confirmation' => ['min:5'],
         ];
     }
 
