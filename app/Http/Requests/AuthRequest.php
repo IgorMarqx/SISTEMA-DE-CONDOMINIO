@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ApartmentExistRule;
+use App\Rules\CondominiumExistRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
@@ -12,12 +14,12 @@ class AuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:5',
-            'password_confirmation' => 'min:5',
-            'condominium_id' => 'required|condominium_exists',
-            'apartment_id' => 'required|apartment_exists',
+            'name' => ['required'],
+            'email' => ['required', 'email', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:5'],
+            'password_confirmation' => ['min:5'],
+            'condominium_id' => ['required', new CondominiumExistRule($this->input('condominium_id'))],
+            'apartment_id' => ['required', new ApartmentExistRule($this->input('apartment_id'))],
         ];
     }
 
@@ -46,10 +48,8 @@ class AuthRequest extends FormRequest
             'password_confirmation.min' => 'A confirmação tem que ter no minimo 5 caracteres.',
 
             'condominium_id.required' => 'Escolha um condominio.',
-            'condominium_id.condominium_exists' => 'Condominio Inválido.',
 
             'apartment_id.required' => 'Escolha um apartamento.',
-            'apartment_id.apartment_exists' => 'Apartamento inválido.',
         ];
     }
 }
