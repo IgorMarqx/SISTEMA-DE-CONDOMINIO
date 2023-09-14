@@ -11,8 +11,8 @@ class CondominiumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:condominiums',
-            'address' => 'required|unique:condominiums'
+            'name' => ['required', 'unique:condominiums'],
+            'address' => ['required', 'unique:condominiums']
         ];
     }
 
