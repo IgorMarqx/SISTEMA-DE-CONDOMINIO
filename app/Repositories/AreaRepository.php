@@ -70,22 +70,21 @@ class AreaRepository implements AreaRepositoryInterface
     {
         $area = Area::find($id);
 
+        if ($area) {
+            $area->update([
+                'allowed' => $data['allowed'],
+                'name' => $data['name'],
+                'days' => $data['days'],
+                'start_time' => $data['start_time'],
+                'end_time' => $data['end_time'],
+                'condominium_id' => $id
+            ]);
+            return new ApiResource(['error' => false, 'message' => 'Área atualizada com sucesso'], 200);
+        }
         try {
-            if ($area) {
-                $area->update([
-                    'allowed' => $data['allowed'],
-                    'name' => $data['name'],
-                    'days' => $data['days'],
-                    'start_time' => $data['start_time'],
-                    'end_time' => $data['end_time'],
-                    'condominium_id' => $id
-                ]);
-
-                return new ApiResource(['error' => false, 'message' => 'Área atualizada com sucesso'], 200);
-            }
-
             return new ApiResource(['error' => true, 'message' => 'Área não encontrada'], 404);
-        } catch (Exception $e) {
+        } catch
+        (Exception $e) {
             throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
         }
     }
@@ -97,13 +96,13 @@ class AreaRepository implements AreaRepositoryInterface
     {
         $area = Area::find($id);
 
+        if (!$area) {
+            return new ApiResource(['error' => true, 'message' => 'Área não encontrada.'], 404);
+        }
 
         try {
-            if (!$area) {
-                return new ApiResource(['error' => true, 'message' => 'Área não encontrada.'], 404);
-            }
-
             $area->delete($id);
+
             return new ApiResource(['error' => false, 'message' => 'Área deletada com sucesso.'], 200);
         } catch (Exception $e) {
             throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
