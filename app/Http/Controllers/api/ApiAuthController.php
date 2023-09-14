@@ -4,7 +4,8 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
-use App\Http\Requests\UserRequest;
+use App\Http\Resources\ApiResource;
+use App\Http\Resources\auth\TokenResource;
 use App\Repositories\Interfaces\AuthRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -17,21 +18,13 @@ class ApiAuthController extends Controller
         $this->authRepository = $authRepository;
     }
 
-    public function login(Request $request): object
+    public function login(Request $request): ApiResource|TokenResource
     {
-        $token = $this->authRepository->getToken($request);
-
-        return response()->json($token);
+        return $this->authRepository->getToken($request);
     }
 
-    public function register(AuthRequest $request): object
+    public function register(AuthRequest $request): ApiResource
     {
-        $user = $this->authRepository->registerUser($request);
-
-        if (!$user) {
-            return response()->json($user);
-        }
-
-        return response()->json($user);
+        return $this->authRepository->registerUser($request);
     }
 }
