@@ -12,7 +12,7 @@ use \Illuminate\Database\Eloquent\Collection;
 
 class ApiAreaController extends Controller
 {
-    private $areaRepository;
+    private AreaRepositoryInterface $areaRepository;
 
     public function __construct(AreaRepositoryInterface $areaRepository)
     {
