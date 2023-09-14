@@ -66,16 +66,16 @@ class ApartmentRepository implements ApartmentRepositoryInterface
     {
         $apartment = Apartment::find($id);
 
+        if (!$apartment) {
+            $apartment->update([
+                'identify' => $data->identify,
+                'condominium_id' => $data->condominium_id,
+            ]);
+
+            return new ApiResource(['error' => false, 'message' => 'Apartamento atualizado com sucesso'], 200);
+        }
+
         try {
-            if (!$apartment) {
-                $apartment->update([
-                    'identify' => $data->identify,
-                    'condominium_id' => $data->condominium_id,
-                ]);
-
-                return new ApiResource(['error' => false, 'message' => 'Apartamento atualizado com sucesso'], 200);
-            }
-
             return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
         } catch (Exception $e) {
             throw new Exception('Ocorreu um erro: ' . $e->getMessage());
@@ -89,11 +89,11 @@ class ApartmentRepository implements ApartmentRepositoryInterface
     {
         $apartment = Apartment::find($id);
 
-        try {
-            if (!$apartment) {
-                return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
-            }
+        if (!$apartment) {
+            return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
+        }
 
+        try {
             $apartment->delete();
             return new ApiResource(['error' => false, 'message' => 'Apartamento deletado com sucesso'], 200);
         } catch (Exception $e) {
