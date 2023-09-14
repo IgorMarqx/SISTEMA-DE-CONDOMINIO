@@ -51,11 +51,11 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = User::find($id);
 
-        try {
-            if (!$user) {
-                return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
-            }
+        if (!$user) {
+            return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
+        }
 
+        try {
             return new UserShowResource($user);
         } catch (Exception $e) {
             throw new Exception('Erro: ' . $e->getMessage());
@@ -69,17 +69,17 @@ class UserRepository implements UserRepositoryInterface
     {
         $userUpdate = User::where('id', $id)->first();
 
-        try {
-            if ($userUpdate) {
-                $userUpdate->create([
-                    'name' => $data['name'],
-                    'email' => $data['email'],
-                    'password' => $data['password'],
-                    'updated_at' => date('Y-m-d H:i:s')
-                ]);
-                return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
-            }
+        if ($userUpdate) {
+            $userUpdate->create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => $data['password'],
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
+        }
 
+        try {
             return new ApiResource(['error' => false, 'message' => 'Usuário atualizado com sucesso'], 200);
         } catch (Exception $e) {
             throw new Exception('Erro: ' . $e->getMessage());
@@ -93,13 +93,13 @@ class UserRepository implements UserRepositoryInterface
     {
         $user = User::find($id);
 
+        if ($user) {
+            $user->delete();
+
+            return new ApiResource(['error' => false, 'message' => 'Usuário deletado com sucessp'], 200);
+        }
+
         try {
-            if ($user) {
-                $user->delete();
-
-                return new ApiResource(['error' => false, 'message' => 'Usuário deletado com sucessp'], 200);
-            }
-
             return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
         } catch (Exception $e) {
             throw new Exception('Erro: ' . $e->getMessage());
