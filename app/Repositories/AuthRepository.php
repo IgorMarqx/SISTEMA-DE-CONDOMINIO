@@ -23,7 +23,7 @@ class AuthRepository implements AuthRepositoryInterface
         ]);
 
         if (!$token) {
-            return new ApiResource(['error' => true, 'message' => 'E-mail ou senha inválidos!'], 422);
+            return new ApiResource(['error' => true, 'message' => 'E-mail ou senha inválidos!'], 401);
         }
 
         try {
