@@ -13,7 +13,7 @@ class ApartmentCreateRequest extends FormRequest
     {
         return [
             'identify' => ['required'],
-            'condominium_id' => ['required', 'numeric', new CondominiumExistRule($this->input('condominium_id'))],
+            'condominium_id' => ['required', 'numeric', 'condominium_exists'],
         ];
     }
 
