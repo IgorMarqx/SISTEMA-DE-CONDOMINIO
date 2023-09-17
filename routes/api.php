@@ -24,7 +24,7 @@ Route::middleware(['api.auth'])->group(function () {
     Route::get('/users/{id}/edit', [ApiUserController::class, 'edit']);
     Route::get('/condominium/{id}/edit', [ApiCondominiumController::class, 'edit']);
     Route::get('/area/{id}/edit', [ApiAreaController::class, 'edit']);
-    
+
     Route::apiResources([
         'users' => ApiUserController::class,
         'condominium' => ApiCondominiumController::class,
