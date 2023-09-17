@@ -40,5 +40,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+
+        Validator::extend('condominium_exists', function($attribute, $value){
+            return Condominium::where('id', $value)->exists();
+        });
+
+        Validator::extend('apartment_exists', function($attribute, $value){
+            return Apartment::where('id', $value)->exists();
+        });
     }
 }
