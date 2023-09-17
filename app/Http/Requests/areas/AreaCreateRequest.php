@@ -16,7 +16,7 @@ class AreaCreateRequest extends FormRequest
             'days' => ['required', 'date_format:Y-m-d'],
             'start_time' => ['required', 'date_format:H:i:s'],
             'end_time' => ['required', 'date_format:H:i:s'],
-            'condominium_id' => ['required', 'numeric', new CondominiumExistRule($this->input('condominium_id'))],
+            'condominium_id' => ['required', 'numeric','condominium_exists'],
         ];
     }
 
