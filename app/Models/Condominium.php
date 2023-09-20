@@ -16,7 +16,7 @@ class Condominium extends Model
     protected $fillable = [
         'name',
         'address',
-        'number',
+        'color',
     ];
 
     public function area(): HasMany
