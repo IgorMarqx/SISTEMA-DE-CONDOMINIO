@@ -69,15 +69,18 @@ class UserRepository implements UserRepositoryInterface
     {
         $userUpdate = User::where('id', $id)->first();
 
-        if ($userUpdate) {
-            $userUpdate->create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => $data['password'],
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
+        if (!$userUpdate) {
             return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
         }
+
+        $userUpdate->create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'updated_at' => date('Y-m-d H:i:s'),
+            'condominium_id' => $data['condominium_id'],
+            'apartment_id' => $data['apartment_id'],
+        ]);
 
         try {
             return new ApiResource(['error' => false, 'message' => 'Usuário atualizado com sucesso'], 200);
