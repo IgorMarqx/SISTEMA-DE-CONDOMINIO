@@ -12,7 +12,7 @@ class CondominiumRequest extends FormRequest
     {
         return [
             'name' => ['required', 'unique:condominiums'],
-            'address' => ['required', 'unique:condominiums']
+            'address' => ['required', 'unique:condominiums'],
         ];
     }
 
