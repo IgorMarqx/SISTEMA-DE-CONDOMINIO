@@ -15,6 +15,8 @@ class UserRequest extends FormRequest
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'confirmed', 'min:5'],
             'password_confirmation' => ['min:5'],
+            'condominium_id' => ['required', 'numeric', 'condominium_exists'],
+            'apartment_id' => ['required', 'numeric', 'apartment_exists'],
         ];
     }
 
