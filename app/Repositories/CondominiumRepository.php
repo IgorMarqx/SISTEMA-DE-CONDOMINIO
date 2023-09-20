@@ -33,6 +33,7 @@ class CondominiumRepository implements CondominiumRepositoryInterface
         Condominium::create([
             'name' => $data['name'],
             'address' => $data['address'],
+            'color' => $data['color']
         ]);
 
         try {
