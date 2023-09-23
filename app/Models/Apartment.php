@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Apartment extends Model
 {
@@ -26,8 +27,8 @@ class Apartment extends Model
         return $this->hasMany(Garage::class);
     }
 
-    public function user(): BelongsTo
+    public function owner(): HasOne
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Owner::class);
     }
 }
