@@ -20,7 +20,6 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'condominium_id',
-        'apartment_id',
     ];
 
     protected $hidden = [
@@ -38,14 +37,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
-    public function getJWTCustomClaims()
+    public function getJWTCustomClaims(): array
     {
         return [];
     }
 
-    public function apartment(): HasMany
+    public function owner(): HasOne
     {
-        return $this->hasMany(Apartment::class);
+        return $this->hasOne(Owner::class);
     }
 
     public function condominium(): HasOne
