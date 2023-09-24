@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\ApiAuthController;
 use App\Http\Controllers\dashboard\ApiCondominiumController;
+use App\Http\Controllers\dashboard\ApiGarageController;
 use App\Http\Controllers\user\ApiUserController;
 use App\Http\Controllers\dashboard\ApiAreaController;
 use App\Http\Controllers\dashboard\ApiApartmentController;
@@ -30,6 +31,7 @@ Route::middleware(['api.auth'])->group(function () {
         'users' => ApiUserController::class,
         'condominium' => ApiCondominiumController::class,
         'areas' => ApiAreaController::class,
-        'apartment' => ApiApartmentController::class
+        'apartment' => ApiApartmentController::class,
+        'garage' => ApiGarageController::class,
     ]);
 });
