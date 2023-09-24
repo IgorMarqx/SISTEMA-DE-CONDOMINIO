@@ -43,7 +43,6 @@ class AuthRepository implements AuthRepositoryInterface
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'condominium_id' => $data['condominium_id'],
-            'apartment_id' => $data['apartment_id'],
         ]);
 
         try {
