@@ -68,8 +68,8 @@ class ApartmentRepository implements ApartmentRepositoryInterface
 
         if (!$apartment) {
             $apartment->update([
-                'identify' => $data->identify,
-                'condominium_id' => $data->condominium_id,
+                'identify' => $data['indentify'],
+                'condominium_id' => $data['condominium_id'],
             ]);
 
             return new ApiResource(['error' => false, 'message' => 'Apartamento atualizado com sucesso'], 200);
