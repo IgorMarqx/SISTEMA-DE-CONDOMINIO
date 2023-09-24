@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\areas;
+namespace App\Http\Resources\garage;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AreaDeleteResource extends JsonResource
+class GarageShowResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +15,8 @@ class AreaDeleteResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'error' => '',
-            'message' => 'Área deletada com sucesso.'
+            'identify' => $this->identify,
+            'apartment' => $this->apartment,
         ];
     }
 }
