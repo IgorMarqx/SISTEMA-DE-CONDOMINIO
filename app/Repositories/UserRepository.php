@@ -34,7 +34,6 @@ class UserRepository implements UserRepositoryInterface
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'condominium_id' => $data['condominium_id'],
-            'apartment_id' => $data['apartment_id'],
         ]);
 
         try {
@@ -79,7 +78,6 @@ class UserRepository implements UserRepositoryInterface
             'password' => $data['password'],
             'updated_at' => date('Y-m-d H:i:s'),
             'condominium_id' => $data['condominium_id'],
-            'apartment_id' => $data['apartment_id'],
         ]);
 
         try {
