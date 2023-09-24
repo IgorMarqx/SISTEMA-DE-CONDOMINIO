@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\JsonResponse;
 
 class UserRequest extends FormRequest
 {
@@ -16,11 +17,10 @@ class UserRequest extends FormRequest
             'password' => ['required', 'confirmed', 'min:5'],
             'password_confirmation' => ['min:5'],
             'condominium_id' => ['required', 'numeric', 'condominium_exists'],
-            'apartment_id' => ['required', 'numeric', 'apartment_exists'],
         ];
     }
 
-    public function failedValidation(Validator $validator): object
+    public function failedValidation(Validator $validator): JsonResponse
     {
         throw new HttpResponseException(response()->json([
             'error' => true,
