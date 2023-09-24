@@ -7,6 +7,7 @@ use App\Rules\CondominiumExistRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\JsonResponse;
 
 class AuthRequest extends FormRequest
 {
@@ -19,11 +20,10 @@ class AuthRequest extends FormRequest
             'password' => ['required', 'confirmed', 'min:5'],
             'password_confirmation' => ['min:5'],
             'condominium_id' => ['required', 'numeric', 'condominium_exists'],
-            'apartment_id' => ['required', 'numeric', 'apartment_exists'],
         ];
     }
 
-    public function failedValidation(Validator $validator): object
+    public function failedValidation(Validator $validator): JsonResponse
     {
         throw new HttpResponseException(response()->json([
             'error' => true,
