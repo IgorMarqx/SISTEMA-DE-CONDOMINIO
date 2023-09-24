@@ -11,7 +11,8 @@ class Garage extends Model
     use HasFactory;
 
     protected $fillable = [
-        'identify'
+        'identify',
+        'apartment_id'
     ];
 
     public function apartment(): BelongsTo
