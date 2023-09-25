@@ -13,78 +13,36 @@ class GarageRepository implements GarageRepositoryInterface
     /**
      * @throws Exception
      */
-    public function storeGarage($data): ApiResource
+    public function storeGarage($data): Garage
     {
-        Garage::create([
+        return Garage::create([
             'identify' => $data['identify'],
             'apartment_id' => $data['apartment_id'],
         ]);
-        try {
-            return new ApiResource(['error' => false, 'message' => 'Garagem cadastrada com sucesso'], 201);
-        } catch (Exception $e) {
-            throw new Exception('Erro: ' . $e->getMessage());
-        }
     }
 
     /**
      * @throws Exception
      */
-    public function findGarageById($id): GarageShowResource|ApiResource
+    public function findGarageById($id): Garage
     {
-        $garage = Garage::with('apartment')->find($id);
-
-        if (!$garage) {
-            return new ApiResource(['error' => true, 'message' => 'Garagem não encontrada'], 404);
-        }
-
-        try {
-            return new GarageShowResource($garage);
-        } catch (Exception $e) {
-            throw new Exception('Erro ao atualizar/encontrar condominio:' . $e->getMessage());
-        }
+        return Garage::with('apartment')->find($id);
     }
 
     /**
      * @throws Exception
      */
-    public function updateGarage($id, $data): ApiResource
+    public function updateGarage($id, $data): Garage
     {
-        $garage = Garage::find($id);
-
-        if (!$garage) {
-            return new ApiResource(['error' => true, 'message' => 'Garagem não encontrada'], 404);
-        }
-
-        $garage->update([
-            'identify' => $data['identify'],
-            'apartment_id' => $data['apartment_id'],
-        ]);
-
-        try {
-            return new ApiResource(['error' => false, 'message' => 'Garagem atualizada com sucesso'], 200);
-        } catch (Exception $e) {
-            throw new Exception('Erro ao atualizar/encontrar condominio:' . $e->getMessage());
-        }
+        return Garage::find($id);
     }
 
     /**
      * @throws Exception
      */
-    public function deleteGarage($id): ApiResource
+    public function deleteGarage($id): Garage
     {
-        $garage = Garage::find($id);
-
-        if (!$garage) {
-            return new ApiResource(['error' => true, 'message' => 'Garagem não encontrada'], 404);
-        }
-
-        $garage->delete();
-
-        try {
-            return new ApiResource(['error' => false, 'message' => 'Garagem deletada com sucesso'], 200);
-        } catch (Exception $e) {
-            throw new Exception('Erro ao deletar garagem:' . $e->getMessage());
-        }
+        return Garage::find($id);
     }
 
 }
