@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class GarageRequest extends FormRequest
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -17,7 +18,7 @@ class GarageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'identify' => ['required', 'string'],
+            'identify' => ['required', 'string', 'unique'],
             'apartment_id' => ['required', 'numeric', 'apartment_exists'],
         ];
     }
