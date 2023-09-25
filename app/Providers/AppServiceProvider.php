@@ -7,9 +7,11 @@ use App\Models\Condominium;
 
 use App\Repositories\ApartmentRepository;
 use App\Repositories\AreaRepository;
+use App\Repositories\GarageRepository;
 use App\Repositories\Interfaces\ApartmentRepositoryInterface;
 use App\Repositories\Interfaces\AreaRepositoryInterface;
 use App\Repositories\Interfaces\AuthRepositoryInterface;
+use App\Repositories\Interfaces\GarageRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\UserRepository;
 use App\Repositories\AuthRepository;
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(CondominiumRepositoryInterface::class, CondominiumRepository::class);
         $this->app->singleton(AreaRepositoryInterface::class, AreaRepository::class);
         $this->app->singleton(ApartmentRepositoryInterface::class, ApartmentRepository::class);
+        $this->app->singleton(GarageRepositoryInterface::class, GarageRepository::class);
     }
 
     /**
@@ -41,11 +44,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        Validator::extend('condominium_exists', function($attribute, $value){
+        Validator::extend('condominium_exists', function ($attribute, $value) {
             return Condominium::where('id', $value)->exists();
         });
 
-        Validator::extend('apartment_exists', function($attribute, $value){
+        Validator::extend('apartment_exists', function ($attribute, $value) {
             return Apartment::where('id', $value)->exists();
         });
     }
