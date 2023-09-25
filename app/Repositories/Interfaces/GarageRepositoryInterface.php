@@ -2,13 +2,12 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Http\Resources\ApiResource;
-use App\Http\Resources\garage\GarageShowResource;
+use App\Models\Garage;
 
 interface GarageRepositoryInterface
 {
-    public function storeGarage($data): ApiResource;
-    public function findGarageById($id): ApiResource|GarageShowResource;
-    public function updateGarage($id, $data): ApiResource;
-    public function deleteGarage($id): ApiResource;
+    public function storeGarage($data): Garage;
+    public function findGarageById($id): Garage;
+    public function updateGarage($id, $data): Garage;
+    public function deleteGarage($id): Garage;
 }
