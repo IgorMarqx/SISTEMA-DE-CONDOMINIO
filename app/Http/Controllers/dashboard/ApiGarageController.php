@@ -6,16 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\garage\GarageRequest;
 use App\Http\Resources\ApiResource;
 use App\Http\Resources\garage\GarageShowResource;
-use App\Repositories\GarageRepository;
-use Illuminate\Http\Request;
+use App\Services\garage\GarageService;
+use Exception;
 
 class ApiGarageController extends Controller
 {
-    private GarageRepository $garageRepository;
+    private GarageService $garageService;
 
-    public function __construct(GarageRepository $garageRepository)
+    public function __construct(GarageService $garageService)
     {
-        $this->garageRepository = $garageRepository;
+        $this->garageService = $garageService;
     }
 
     /**
@@ -27,38 +27,34 @@ class ApiGarageController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @throws \Exception
+     * @throws Exception
      */
     public function store(GarageRequest $request): ApiResource
     {
-        return $this->garageRepository->storeGarage($request);
+        return $this->garageService->storeGarage($request);
     }
 
     /**
-     * Display the specified resource.
-     * @throws \Exception
+     * @throws Exception
      */
-    public function show(string $id): ApiResource|GarageShowResource
+    public function show(string $id): GarageShowResource|ApiResource
     {
-        return $this->garageRepository->findGarageById($id);
+        return $this->garageService->findGarageById($id);
     }
 
     /**
-     * Update the specified resource in storage.
-     * @throws \Exception
+     * @throws Exception
      */
     public function update(GarageRequest $request, string $id): ApiResource
     {
-        return $this->garageRepository->updateGarage($id, $request);
+        return $this->garageService->updateGarage($id, $request);
     }
 
     /**
-     * Remove the specified resource from storage.
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(string $id): ApiResource
     {
-        return $this->garageRepository->deleteGarage($id);
+        return $this->garageService->deleteGarage($id);
     }
 }
