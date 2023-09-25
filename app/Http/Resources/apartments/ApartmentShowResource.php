@@ -18,7 +18,7 @@ class ApartmentShowResource extends JsonResource
             'id' => $this->id,
             'identify' => $this->identify,
             'condominium_id' => $this->condominium_id,
-            'garages' => $this->garages
+            'garage' => $this->garage
         ];
     }
 }
