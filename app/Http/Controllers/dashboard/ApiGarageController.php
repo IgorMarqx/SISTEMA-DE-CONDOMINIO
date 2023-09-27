@@ -31,7 +31,13 @@ class ApiGarageController extends Controller
      */
     public function store(GarageRequest $request): ApiResource
     {
-        return $this->garageService->storeGarage($request);
+        $this->garageService->storeGarage($request);
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Garagem cadastrada com sucesso'], 201);
+        } catch (Exception $e) {
+            throw new Exception('Erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -39,7 +45,17 @@ class ApiGarageController extends Controller
      */
     public function show(string $id): GarageShowResource|ApiResource
     {
-        return $this->garageService->findGarageById($id);
+        $garage = $this->garageService->findGarageById($id);
+
+        if($garage['error']){
+            return new ApiResource($garage, 404);
+        }
+
+        try {
+            return new GarageShowResource($garage);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao atualizar/encontrar condominio:' . $e->getMessage());
+        }
     }
 
     /**
@@ -47,7 +63,17 @@ class ApiGarageController extends Controller
      */
     public function update(GarageRequest $request, string $id): ApiResource
     {
-        return $this->garageService->updateGarage($id, $request);
+        $garage = $this->garageService->updateGarage($id, $request);
+
+        if(!$garage){
+            return new ApiResource(['error' => true, 'message' => 'Garagem não encontrada'], 404);
+        }
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Garagem atualizada com sucesso'], 200);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao atualizar/encontrar condominio:' . $e->getMessage());
+        }
     }
 
     /**
@@ -55,6 +81,16 @@ class ApiGarageController extends Controller
      */
     public function destroy(string $id): ApiResource
     {
-        return $this->garageService->deleteGarage($id);
+        $garage = $this->garageService->deleteGarage($id);
+
+        if (!$garage) {
+            return new ApiResource(['error' => true, 'message' => 'Garagem não encontrada'], 404);
+        }
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Garagem deletada com sucesso'], 200);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao deletar garagem:' . $e->getMessage());
+        }
     }
 }
