@@ -2,11 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Http\Resources\ApiResource;
-use App\Http\Resources\garage\GarageShowResource;
 use App\Models\Garage;
 use App\Repositories\Interfaces\GarageRepositoryInterface;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 
 class GarageRepository implements GarageRepositoryInterface
 {
@@ -16,7 +15,7 @@ class GarageRepository implements GarageRepositoryInterface
     public function storeGarage($data): Garage
     {
         return Garage::create([
-            'identify' => $data['identify'],
+            'identify' => 'GARAGE '. $data['identify'],
             'apartment_id' => $data['apartment_id'],
         ]);
     }
@@ -24,7 +23,7 @@ class GarageRepository implements GarageRepositoryInterface
     /**
      * @throws Exception
      */
-    public function findGarageById($id): Garage
+    public function findGarageById($id): Garage|null|Collection
     {
         return Garage::with('apartment')->find($id);
     }
@@ -32,17 +31,17 @@ class GarageRepository implements GarageRepositoryInterface
     /**
      * @throws Exception
      */
-    public function updateGarage($id, $data): Garage
+    public function updateGarage(Garage $garage, $data): Garage|bool|null
     {
-        return Garage::find($id);
+        return $garage->update($data);
     }
 
     /**
      * @throws Exception
      */
-    public function deleteGarage($id): Garage
+    public function deleteGarage(Garage $garage): Garage|bool|null
     {
-        return Garage::find($id);
+        return $garage->delete();
     }
 
 }
