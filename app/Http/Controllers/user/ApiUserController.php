@@ -8,22 +8,26 @@ use App\Http\Resources\user\UserShowResource;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Http\Requests\UserRequest;
+use App\Services\user\UserService;
 use Illuminate\Database\Eloquent\Collection;
 
 class ApiUserController extends Controller
 {
 
-    private UserRepositoryInterface $userRepository;
+    private UserService $userService;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserService $userService)
     {
-        $this->userRepository = $userRepository;
+        $this->userService = $userService;
         $this->middleware('api.auth');
     }
 
+    /**
+     * @throws \Exception
+     */
     public function index(): Collection
     {
-        return $this->userRepository->getAll();
+        return $this->userService->getAll();
     }
 
     /**
@@ -31,7 +35,7 @@ class ApiUserController extends Controller
      */
     public function show(string $id): ApiResource|UserShowResource
     {
-        return $this->userRepository->findUserById($id);
+        return $this->userService->findUserById($id);
     }
 
     /**
@@ -39,7 +43,7 @@ class ApiUserController extends Controller
      */
     public function update(UserRequest $request, string $id): ApiResource
     {
-        return $this->userRepository->updateUser($request, $id);
+        return $this->userService->updateUser($request, $id);
     }
 
     /**
@@ -47,6 +51,6 @@ class ApiUserController extends Controller
      */
     public function destroy(string $id): object
     {
-        return $this->userRepository->destroyUser($id);
+        return $this->userService->destroyUser($id);
     }
 }
