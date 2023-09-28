@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Resources\ApiResource;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Models\User;
@@ -38,15 +39,15 @@ class UserRepository implements UserRepositoryInterface
      */
     public function findUserById($id): User|null|Collection
     {
-        return User::find($id);
+        return User::with('condominium')->find($id);
     }
 
     /**
      * @throws Exception
      */
-    public function updateUser(User $user,$data): User|bool|null
+    public function updateUser(User $user, $data): User|bool|null
     {
-       return $user->update($data);
+        return $user->update($data);
     }
 
     /**
@@ -55,5 +56,13 @@ class UserRepository implements UserRepositoryInterface
     public function destroyUser(User $user): User|bool|null
     {
         return $user->delete();
+    }
+
+    public function filterUser($data): LengthAwarePaginator
+    {
+        return User::where('name', 'like', "%$data->userFilter%")
+            ->orWhere('email', 'like', "%$data->userFilter%")
+            ->orWhere('condominium_id', '=', $data->userFilter)
+            ->paginate(5);
     }
 }
