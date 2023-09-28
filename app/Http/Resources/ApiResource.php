@@ -23,7 +23,9 @@ class ApiResource extends JsonResource
     {
         return [
             'error' => $this->data['error'],
-            'message' => $this->data['message'] . '.'
+            'message' => $this->data['message'] . '.',
+            'timestamp' => date('Y-m-d H:i:s'),
+            'path' => $request->fullUrl(),
         ];
     }
 
