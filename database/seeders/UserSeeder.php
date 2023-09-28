@@ -22,5 +22,7 @@ class UserSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
+
+        \App\Models\User::factory(10)->create();
     }
 }
