@@ -36,7 +36,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * @throws Exception
      */
-    public function findUserById($id): User
+    public function findUserById($id): User|null|Collection
     {
         return User::find($id);
     }
@@ -44,26 +44,16 @@ class UserRepository implements UserRepositoryInterface
     /**
      * @throws Exception
      */
-    public function updateUser($data, $id): bool
+    public function updateUser(User $user,$data): User|bool|null
     {
-        $user = User::find($id);
-
-        return $user->update([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => $data['password'],
-            'updated_at' => date('Y-m-d H:i:s'),
-            'condominium_id' => $data['condominium_id'],
-        ], $id);
+       return $user->update($data);
     }
 
     /**
      * @throws Exception
      */
-    public function destroyUser($id): User
+    public function destroyUser(User $user): User|bool|null
     {
-        $user = User::find($id);
-
         return $user->delete();
     }
 }
