@@ -18,11 +18,11 @@ class UserShowResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'condominium_id' => $this->condominium_id,
-            'apartment_id' => $this->apartment_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'date_now' => date('Y-m-d H:i:s')
+            'timestamp' => date('Y-m-d H:i:s'),
+            'path' => $request->fullUrl(),
+            'condominium' => $this->condominium
         ];
     }
 }
