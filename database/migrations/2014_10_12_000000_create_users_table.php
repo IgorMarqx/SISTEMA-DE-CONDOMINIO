@@ -22,6 +22,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('condominium_id')->references('id')->on('condominiums');
+            $table->index('name');
+            $table->index('email');
+            $table->index('condominium_id');
         });
     }
 
