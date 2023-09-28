@@ -19,7 +19,8 @@ class CondominiumShowResource extends JsonResource
             'address' => $this->address,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'data_now' => date('Y-m-d H:i:s'),
+            'timestamp' => date('Y-m-d H:i:s'),
+            'path' => $request->fullUrl(),
             'areas' => $this->area
         ];
     }
