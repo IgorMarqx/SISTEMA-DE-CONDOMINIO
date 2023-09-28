@@ -2,8 +2,8 @@
 
 namespace App\Services\user;
 
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\ApiResource;
-use App\Http\Resources\user\UserShowResource;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Exception;
@@ -47,54 +47,47 @@ class UserService
     /**
      * @throws Exception
      */
-    public function findUserById($id): UserShowResource|ApiResource
+    public function findUserById($id): array|Collection|User
     {
         $user = $this->userRepository->findUserById($id);
 
-        if (!$user) {
-            return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
+        if ($user) {
+            return $user;
         }
 
-        try {
-            return new UserShowResource($user);
-        } catch (Exception $e) {
-            throw new Exception('Erro: ' . $e->getMessage());
-        }
+        return ['error' => true, 'message' => 'Usuário não encontrado'];
     }
 
     /**
      * @throws Exception
      */
-    public function updateUser($data, $id): ApiResource
+    public function updateUser(UserRequest $data, $id): User|null|bool
     {
-        $userUpdate = $this->userRepository->updateUser($data, $id);
+        $user = $this->userRepository->findUserById($id);
 
-        if (!$userUpdate) {
-            return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
+        if ($user) {
+            return $this->userRepository->updateUser($user, [
+                'name' => $data->name,
+                'email' => $data->email,
+                'password' => $data->password,
+                'condominium_id' => $data->condominium_id,
+            ]);
         }
 
-        try {
-            return new ApiResource(['error' => false, 'message' => 'Usuário atualizado com sucesso'], 200);
-        } catch (Exception $e) {
-            throw new Exception('Erro: ' . $e->getMessage());
-        }
+        return null;
     }
 
     /**
      * @throws Exception
      */
-    public function destroyUser($id): ApiResource
+    public function destroyUser($id): User|null|bool
     {
-        $user = $this->userRepository->destroyUser($id);
+        $user = $this->userRepository->findUserById($id);
 
-        if (!$user) {
-            return new ApiResource(['error' => true, 'message' => 'Usuário não encontrado'], 404);
+        if(!$user){
+            return null;
         }
 
-        try {
-            return new ApiResource(['error' => false, 'message' => 'Usuário deletado com sucesso'], 200);
-        } catch (Exception $e) {
-            throw new Exception('Erro: ' . $e->getMessage());
-        }
+        return $this->userRepository->destroyUser($user);
     }
 }
