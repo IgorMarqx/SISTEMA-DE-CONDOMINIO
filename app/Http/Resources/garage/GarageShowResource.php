@@ -16,6 +16,8 @@ class GarageShowResource extends JsonResource
     {
         return [
             'identify' => $this->identify,
+            'timestamp' => date('Y-m-d H:i:s'),
+            'path' => $request->fullUrl(),
             'apartment' => $this->apartment,
         ];
     }
