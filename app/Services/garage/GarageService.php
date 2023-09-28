@@ -69,6 +69,4 @@ class GarageService
 
         return $this->garageRepository->deleteGarage($garage);
     }
-
-
 }
