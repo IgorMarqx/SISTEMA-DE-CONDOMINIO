@@ -2,12 +2,13 @@
 
 namespace App\Services\user;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\ApiResource;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class UserService
 {
@@ -84,10 +85,15 @@ class UserService
     {
         $user = $this->userRepository->findUserById($id);
 
-        if(!$user){
+        if (!$user) {
             return null;
         }
 
         return $this->userRepository->destroyUser($user);
+    }
+
+    public function filterUser($user): LengthAwarePaginator
+    {
+        return $this->userRepository->filterUser($user);
     }
 }
