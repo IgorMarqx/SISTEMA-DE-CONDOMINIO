@@ -17,6 +17,8 @@ class ApartmentShowResource extends JsonResource
         return [
             'id' => $this->id,
             'identify' => $this->identify,
+            'timestamp' => date('Y-m-d H:i:s'),
+            'path' => $request->fullUrl(),
             'condominium_id' => $this->condominium_id,
             'garage' => $this->garage
         ];
