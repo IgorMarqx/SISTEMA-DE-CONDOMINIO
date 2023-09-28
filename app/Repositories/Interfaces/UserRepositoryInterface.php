@@ -3,9 +3,9 @@
 namespace App\Repositories\Interfaces;
 
 use App\Http\Resources\ApiResource;
-use App\Http\Resources\user\UserShowResource;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use \Illuminate\Support\Collection;
 
 interface UserRepositoryInterface
 {
@@ -18,4 +18,6 @@ interface UserRepositoryInterface
     public function updateUser(User $user, $data): User|bool|null;
 
     public function destroyUser(User $user): User|null|bool;
+
+    public function filterUser($data): LengthAwarePaginator;
 }
