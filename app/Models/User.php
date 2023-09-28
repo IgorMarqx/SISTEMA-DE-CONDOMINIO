@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,8 +46,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Owner::class);
     }
 
-    public function condominium(): HasOne
+    public function condominium(): belongsTo
     {
-        return $this->hasOne(Condominium::class);
+        return $this->belongsTo(Condominium::class);
     }
 }
