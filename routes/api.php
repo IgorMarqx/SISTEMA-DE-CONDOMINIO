@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\api\ApiAuthController;
+use App\Http\Controllers\auth\ApiAuthController;
 use App\Http\Controllers\dashboard\ApiCondominiumController;
 use App\Http\Controllers\dashboard\ApiGarageController;
 use App\Http\Controllers\user\ApiUserController;
