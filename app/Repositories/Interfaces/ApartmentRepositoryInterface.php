@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
+use App\Models\Apartment;
 use Illuminate\Database\Eloquent\Collection;
 
 interface ApartmentRepositoryInterface
