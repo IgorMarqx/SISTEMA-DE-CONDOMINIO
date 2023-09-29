@@ -2,11 +2,10 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Http\Resources\ApiResource;
-use App\Http\Resources\auth\TokenResource;
+use App\Models\User;
 
 interface AuthRepositoryInterface
 {
-    public function getToken($data): ApiResource|TokenResource;
-    public function registerUser($data): ApiResource;
+    public function getToken($data): string;
+    public function registerUser($data): User;
 }
