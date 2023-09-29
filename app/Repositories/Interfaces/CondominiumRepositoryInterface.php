@@ -2,8 +2,6 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Http\Resources\ApiResource;
-use App\Http\Resources\condominiums\CondominiumShowResource;
 use App\Models\Condominium;
 use Illuminate\Database\Eloquent\Collection;
 
