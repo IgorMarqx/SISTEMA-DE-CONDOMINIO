@@ -10,11 +10,11 @@ interface ApartmentRepositoryInterface
 {
     public function getAll(): Collection;
 
-    public function storeApartment($data): ApiResource;
+    public function storeApartment($data): Apartment|null;
 
-    public function findApartmentById($id): ApiResource|ApartmentShowResource;
+    public function findApartmentById($id): Collection|Apartment|null;
 
-    public function updateApartment($data, $id): ApiResource;
+    public function updateApartment(Apartment $apartment, $data): bool|null;
 
-    public function deleteApartment($id): ApiResource;
+    public function deleteApartment(Apartment $apartment): bool|null;
 }
