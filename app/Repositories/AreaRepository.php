@@ -2,8 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Http\Resources\ApiResource;
-use App\Http\Resources\areas\AreaShowResource;
 use App\Models\Area;
 use App\Repositories\Interfaces\AreaRepositoryInterface;
 use Exception;
@@ -16,96 +14,42 @@ class AreaRepository implements AreaRepositoryInterface
      */
     public function getAll(): Collection
     {
-        try {
-            return Area::all();
-        } catch (Exception $e) {
-            throw new Exception('Erro ao listar apartamentos:' . $e->getMessage());
-        }
+        return Area::all();
     }
 
     /**
      * @throws Exception
      */
-    public function storeArea($data): ApiResource
+    public function storeArea($data): Area
     {
+        return Area::create([
+            'name' => $data['name'],
+            'days' => $data['days'],
+            'start_time' => $data['start_time'],
+            'end_time' => $data['end_time'],
+            'condominium_id' => $data['condominium_id'],
+            'allowed' => 1
+        ]);
+    }
 
-        try {
-            Area::create([
-                'name' => $data['name'],
-                'days' => $data['days'],
-                'start_time' => $data['start_time'],
-                'end_time' => $data['end_time'],
-                'condominium_id' => $data['condominium_id'],
-                'allowed' => 1
-            ]);
-
-            return new ApiResource(['error' => false, 'message' => 'Área criada com sucesso'], 201);
-        } catch (Exception $e) {
-            throw new Exception('Falha ao criar area:' . $e->getMessage());
-        }
+    public function findAreaById($id): Area|Collection|null
+    {
+        return Area::with('condominium')->find($id);
     }
 
     /**
      * @throws Exception
      */
-    public function findAreaById($id): ApiResource|AreaShowResource
+    public function updateArea(Area $area, $data): bool
     {
-        $area = Area::with('condominium')->find($id);
-
-        if (!$area) {
-            return new ApiResource(['error' => true, 'message' => 'Área não encontrada'], 404);
-        }
-
-        try {
-            return new AreaShowResource($area);
-        } catch (Exception $e) {
-            throw new Exception('Erro ao criar área:' . $e->getMessage());
-        }
+        return $area->update($data);
     }
 
     /**
      * @throws Exception
      */
-    public function updateArea($data, $id): ApiResource
+    public function deleteArea(Area $area): bool
     {
-        $area = Area::find($id);
-
-        if ($area) {
-            $area->update([
-                'allowed' => $data['allowed'],
-                'name' => $data['name'],
-                'days' => $data['days'],
-                'start_time' => $data['start_time'],
-                'end_time' => $data['end_time'],
-                'condominium_id' => $id
-            ]);
-            return new ApiResource(['error' => false, 'message' => 'Área atualizada com sucesso'], 200);
-        }
-        try {
-            return new ApiResource(['error' => true, 'message' => 'Área não encontrada'], 404);
-        } catch
-        (Exception $e) {
-            throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
-        }
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function deleteArea($id): ApiResource
-    {
-        $area = Area::find($id);
-
-        if (!$area) {
-            return new ApiResource(['error' => true, 'message' => 'Área não encontrada.'], 404);
-        }
-
-        try {
-            $area->delete($id);
-
-            return new ApiResource(['error' => false, 'message' => 'Área deletada com sucesso.'], 200);
-        } catch (Exception $e) {
-            throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
-        }
+        return $area->delete();
     }
 }
