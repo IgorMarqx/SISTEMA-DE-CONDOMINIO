@@ -20,7 +20,7 @@ class GarageService
     /**
      * @throws Exception
      */
-    public function storeGarage(GarageRequest $request): Garage
+    public function storeGarage($request): Garage
     {
         return $this->garageRepository->storeGarage($request);
     }
@@ -28,15 +28,9 @@ class GarageService
     /**
      * @throws Exception
      */
-    public function findGarageById(string $id): array|Collection|Garage
+    public function findGarageById(string $id): null|Collection|Garage
     {
-        $garage = $this->garageRepository->findGarageById($id);
-
-        if ($garage) {
-            return $garage;
-        }
-
-        return ['error' => true, 'message' => 'Garagem não encontrada'];
+        return $this->garageRepository->findGarageById($id);
     }
 
     /**
