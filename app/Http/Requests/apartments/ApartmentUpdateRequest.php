@@ -20,6 +20,6 @@ class ApartmentUpdateRequest extends FormRequest
         throw  new HttpResponseException(response()->json([
             'error' => true,
             'message' => $validator->errors()->first()
-        ], 402));
+        ]));
     }
 }
