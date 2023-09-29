@@ -7,16 +7,17 @@ use App\Http\Requests\apartments\ApartmentCreateRequest;
 use App\Http\Requests\apartments\ApartmentUpdateRequest;
 use App\Http\Resources\apartments\ApartmentShowResource;
 use App\Http\Resources\ApiResource;
-use App\Repositories\ApartmentRepository;
+use App\Services\apartment\ApartmentService;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
 class ApiApartmentController extends Controller
 {
-    private ApartmentRepository $apartmentRepository;
+    private ApartmentService $apartmentService;
 
-    public function __construct(ApartmentRepository $apartmentRepository)
+    public function __construct(ApartmentService $apartmentService)
     {
-        $this->apartmentRepository = $apartmentRepository;
+        $this->apartmentService = $apartmentService;
     }
 
     /**
@@ -25,7 +26,11 @@ class ApiApartmentController extends Controller
      */
     public function index(): Collection
     {
-        return $this->apartmentRepository->getAll();
+        try {
+            return $this->apartmentService->getAll();
+        } catch (Exception $e) {
+            throw new Exception('Erro ao listar apartamentos:' . $e->getMessage());
+        }
     }
 
     /**
@@ -34,7 +39,13 @@ class ApiApartmentController extends Controller
      */
     public function store(ApartmentCreateRequest $request): ApiResource
     {
-        return $this->apartmentRepository->storeApartment($request);
+        $this->apartmentService->storeApartment($request);
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Apartamento criado com sucesso'], 201);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
+        }
     }
 
     /**
@@ -43,7 +54,17 @@ class ApiApartmentController extends Controller
      */
     public function show(string $id): ApiResource|ApartmentShowResource
     {
-        return $this->apartmentRepository->findApartmentById($id);
+        $apartment = $this->apartmentService->findApartmentById($id);
+
+        if (!$apartment) {
+            return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
+        }
+
+        try {
+            return new ApartmentShowResource($apartment);
+        } catch (Exception $e) {
+            throw new Exception('Ocorreu um erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -52,7 +73,17 @@ class ApiApartmentController extends Controller
      */
     public function update(ApartmentUpdateRequest $request, string $id): ApiResource
     {
-        return $this->apartmentRepository->updateApartment($request, $id);
+        $apartment = $this->apartmentService->updateApartment($request, $id);
+
+        if (!$apartment) {
+            return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 404);
+        }
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Apartamento atualizado com sucesso'], 200);
+        } catch (Exception $e) {
+            throw new Exception('Ocorreu um erro: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -61,6 +92,17 @@ class ApiApartmentController extends Controller
      */
     public function destroy(string $id): ApiResource
     {
-        return $this->apartmentRepository->deleteApartment($id);
+        $apartment = $this->apartmentService->deleteApartment($id);
+
+        if (!$apartment) {
+            return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
+        }
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Apartamento deletado com sucesso'], 200);
+        } catch (Exception $e) {
+            throw new Exception('Ocorreu um erro: ' . $e->getMessage());
+        }
+
     }
 }
