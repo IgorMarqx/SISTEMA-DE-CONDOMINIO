@@ -6,62 +6,103 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\condominiums\CondominiumRequest;
 use App\Http\Resources\ApiResource;
 use App\Http\Resources\condominiums\CondominiumShowResource;
-use App\Repositories\Interfaces\CondominiumRepositoryInterface;
+use App\Services\condominium\CondominiumService;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
 class ApiCondominiumController extends Controller
 {
-    private CondominiumRepositoryInterface $condominiumRepository;
+    private CondominiumService $condominiumService;
 
-    public function __construct(CondominiumRepositoryInterface $condominiumRepository)
+    public function __construct(CondominiumService $condominiumService)
     {
-        $this->condominiumRepository = $condominiumRepository;
+        $this->condominiumService = $condominiumService;
         $this->middleware('api.auth');
     }
 
     /**
      * Display a listing of the resource.
+     * @throws Exception
      */
     public function index(): Collection
     {
-        return $this->condominiumRepository->getAll();
+        try {
+            return $this->condominiumService->getAll();
+        } catch (Exception $e) {
+            throw new Exception('Error: ' . $e->getMessage());
+        }
     }
 
     /**
      * Store a newly created resource in storage.
+     * @throws Exception
      */
     public function store(CondominiumRequest $request): object
     {
-        return $this->condominiumRepository->storeCondominium($request);
+        $this->condominiumService->storeCondominium($request);
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Condominio criado com sucesso'], 201);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
+        }
     }
 
     /**
      * Display the specified resource.
+     * @throws Exception
      */
     public function show(string $id): ApiResource|CondominiumShowResource
     {
-        return $this->condominiumRepository->findCondominiumById($id);
+        $condominium = $this->condominiumService->findCondominiumById($id);
+
+        if (!$condominium) {
+            return new ApiResource(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
+        }
+
+        try {
+            return new CondominiumShowResource($condominium);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao encontrar condominio:' . $e->getMessage());
+        }
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws Exception
      */
 
-    public function edit(string $id): ApiResource|CondominiumShowResource
+    public function update(CondominiumRequest $request, string $id): ApiResource
     {
-        return $this->condominiumRepository->findCondominiumById($id);
-    }
+        $condominium = $this->condominiumService->updateCondominium($request, $id);
 
-    public function update(CondominiumRequest $request, string $id): object
-    {
-        return $this->condominiumRepository->updateCondominium($request, $id);
+        if (!$condominium) {
+            return new ApiResource(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
+        }
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Condominio atualizado com sucesso.'], 200);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao atualizar/encontrar condominio:' . $e->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
+     * @throws Exception
      */
     public function destroy(string $id): ApiResource
     {
-        return $this->condominiumRepository->deleteCondominium($id);
+        $condominium = $this->condominiumService->deleteCondominium($id);
+
+        if (!$condominium) {
+            return new ApiResource(['error' => true, 'message' => 'Condominio não encontrado.'], 404);
+        }
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Condominio deletado com sucesso.'], 200);
+        } catch (Exception $e) {
+            throw new Exception('Erro ao atualizar/encontrar condominio:' . $e->getMessage());
+        }
     }
 }
