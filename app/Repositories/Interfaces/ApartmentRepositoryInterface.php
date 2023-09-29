@@ -2,8 +2,6 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Http\Resources\apartments\ApartmentShowResource;
-use App\Http\Resources\ApiResource;
 use Illuminate\Database\Eloquent\Collection;
 
 interface ApartmentRepositoryInterface
