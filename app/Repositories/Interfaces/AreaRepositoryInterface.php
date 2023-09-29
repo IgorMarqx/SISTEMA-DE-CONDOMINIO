@@ -3,17 +3,19 @@
 namespace App\Repositories\Interfaces;
 
 use App\Http\Resources\ApiResource;
-use App\Http\Resources\areas\AreaErrorResource;
-use App\Http\Resources\areas\AreaShowResource;
-use App\Http\Resources\areas\AreaUpdateResource;
 use App\Models\Area;
+use App\Models\Condominium;
 use Illuminate\Database\Eloquent\Collection;
 
 interface AreaRepositoryInterface
 {
     public function getAll(): Collection;
-    public function storeArea($data): ApiResource;
-    public function findAreaById($id): ApiResource|AreaShowResource;
-    public function updateArea($data, $id): ApiResource;
-    public function deleteArea($id): ApiResource;
+
+    public function storeArea($data): Area;
+
+    public function findAreaById($id): Area|Collection|null;
+
+    public function updateArea(Area $area, $data): bool;
+
+    public function deleteArea(Area $area): bool;
 }
