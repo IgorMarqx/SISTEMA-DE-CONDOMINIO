@@ -47,14 +47,14 @@ class ApiGarageController extends Controller
     {
         $garage = $this->garageService->findGarageById($id);
 
-        if($garage['error']){
-            return new ApiResource($garage, 404);
+        if(!$garage){
+            return new ApiResource(['error' => true, 'message' => 'Garagem não encontrada'], 404);
         }
 
         try {
             return new GarageShowResource($garage);
         } catch (Exception $e) {
-            throw new Exception('Erro ao atualizar/encontrar condominio:' . $e->getMessage());
+            throw new Exception('Erro ao atualizar/encontrar garagem:' . $e->getMessage());
         }
     }
 
