@@ -5,9 +5,11 @@ namespace App\Repositories;
 use App\Http\Resources\apartments\ApartmentShowResource;
 use App\Http\Resources\ApiResource;
 use App\Models\Apartment;
+use App\Models\Garage;
 use App\Repositories\Interfaces\ApartmentRepositoryInterface;
 use Exception;
 use \Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ApartmentRepository implements ApartmentRepositoryInterface
 {
@@ -16,88 +18,51 @@ class ApartmentRepository implements ApartmentRepositoryInterface
      */
     public function getAll(): Collection
     {
-        try {
-            return Apartment::all();
-        } catch (Exception $e) {
-            throw new Exception('Erro ao listar apartamentos:' . $e->getMessage());
-        }
+        return Apartment::all();
     }
 
     /**
      * @throws Exception
      */
-    public function storeApartment($data): ApiResource
+    public function storeApartment($data): Apartment|null
     {
-        Apartment::create([
+        return Apartment::create([
             'identify' => $data['identify'],
             'condominium_id' => $data['condominium_id'],
             'garage_id' => $data['garage_id'],
         ]);
-
-        try {
-            return new ApiResource(['error' => false, 'message' => 'Apartamento criado com sucesso'], 201);
-        } catch (Exception $e) {
-            throw new Exception('Erro ao criar apartamento:' . $e->getMessage());
-        }
     }
 
     /**
      * @throws Exception
      */
-    public function findApartmentById($id): ApiResource|ApartmentShowResource
+    public function findApartmentById($id): Collection|Apartment|null
     {
-        $apartment = Apartment::with('garage')->find($id);
-
-        if (!$apartment) {
-            return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
-        }
-
-        try {
-            return new ApartmentShowResource($apartment);
-        } catch (Exception $e) {
-            throw new Exception('Ocorreu um erro: ' . $e->getMessage());
-        }
+        return Apartment::with('garage')->find($id);
     }
 
     /**
      * @throws Exception
      */
-    public function updateApartment($data, $id): ApiResource
+    public function updateApartment(Apartment $apartment, $data): bool|null
     {
-        $apartment = Apartment::find($id);
-
-        if (!$apartment) {
-            $apartment->update([
-                'identify' => $data['indentify'],
-                'condominium_id' => $data['condominium_id'],
-            ]);
-
-            return new ApiResource(['error' => false, 'message' => 'Apartamento atualizado com sucesso'], 200);
-        }
-
-        try {
-            return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
-        } catch (Exception $e) {
-            throw new Exception('Ocorreu um erro: ' . $e->getMessage());
-        }
+        return $apartment->update();
     }
 
     /**
      * @throws Exception
      */
-    public function deleteApartment($id): ApiResource
+    public function deleteApartment(Apartment $apartment): bool|null
     {
-        $apartment = Apartment::find($id);
+        DB::transaction(function () use ($apartment) {
+            $apartment->load('garage');
 
-        if (!$apartment) {
-            return new ApiResource(['error' => true, 'message' => 'Apartamento não encontrado'], 422);
-        }
+            $apartment->garage->each(function ($garage) {
+                $garage->delete();
+            });
 
-        try {
             $apartment->delete();
-            return new ApiResource(['error' => false, 'message' => 'Apartamento deletado com sucesso'], 200);
-        } catch (Exception $e) {
-            throw new Exception('Ocorreu um erro: ' . $e->getMessage());
-        }
+        });
+        return true;
     }
 }
