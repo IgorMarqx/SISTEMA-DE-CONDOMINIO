@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Models\Area;
 use App\Models\Condominium;
 use App\Repositories\Interfaces\CondominiumRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class CondominiumRepository implements CondominiumRepositoryInterface
 {
@@ -37,9 +37,15 @@ class CondominiumRepository implements CondominiumRepositoryInterface
 
     public function deleteCondominium(Condominium $condominium): bool
     {
-        $area = Area::where('condominium_id', $condominium->id);
-        $condominium->delete();
-        $area->delete();
+        DB::transaction(function () use ($condominium) {
+            $condominium->load('area');
+
+            $condominium->area->each(function ($area) {
+                $area->delete();
+            });
+
+            $condominium->delete();
+        });
 
         return true;
     }
