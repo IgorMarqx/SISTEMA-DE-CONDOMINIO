@@ -5,15 +5,15 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 
 Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a necessidade de autenticação:
 
-| TIPO | NOME DA ROTA | O QUE ELA FAZ |
+| TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
 | `GET`    | `api/ping`     |Esta rota serve para verificar o funcionamento da API.|
 | `GET`   | `api/unauthorized`     |Esta rota fornece uma resposta JSON de erro de autorização imediatamente.|
 | `POST`     | `api/auth/login `    |Essa rota permite fazer login na aplicação.|
 
-Rotas que requerem autenticação:
+Rotas de usuários: `users`
 
-| TIPO | NOME DA ROTA | O QUE ELA FAZ |
+| TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
 | `GET`    | `api/auth/register`     |Esta rota é responsável pelo registro de usuários.|
 | `DELETE`   | `api/users/{id}`     |Esta rota é responsável pela exclusão de usuários.|
