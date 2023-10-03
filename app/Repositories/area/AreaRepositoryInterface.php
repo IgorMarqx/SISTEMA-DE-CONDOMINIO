@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Repositories\Interfaces;
+namespace App\Repositories\area;
 
-use App\Http\Resources\ApiResource;
 use App\Models\Area;
-use App\Models\Condominium;
 use Illuminate\Database\Eloquent\Collection;
 
 interface AreaRepositoryInterface
