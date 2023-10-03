@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Repositories\Interfaces;
+namespace App\Repositories\condominium;
 
 use App\Models\Condominium;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface CondominiumRepositoryInterface
 {
@@ -16,4 +17,5 @@ interface CondominiumRepositoryInterface
     public function updateCondominium(Condominium $condominium, $data): Condominium|null|bool;
 
     public function deleteCondominium(Condominium $condominium): bool;
+    public function filterCondominium($data): LengthAwarePaginator;
 }
