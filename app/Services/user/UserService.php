@@ -2,12 +2,12 @@
 
 namespace App\Services\user;
 
-use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\ApiResource;
 use App\Models\User;
-use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\user\UserRepositoryInterface;
 use Exception;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 class UserService
@@ -92,8 +92,14 @@ class UserService
         return $this->userRepository->destroyUser($user);
     }
 
-    public function filterUser($user): LengthAwarePaginator
+    public function filterUser($user): LengthAwarePaginator|null
     {
-        return $this->userRepository->filterUser($user);
+        $filter = $this->userRepository->filterUser($user);
+
+        if ($filter->isEmpty()) {
+            return null;
+        }
+
+        return $filter;
     }
 }
