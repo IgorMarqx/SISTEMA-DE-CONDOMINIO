@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\condominium;
 
 use App\Models\Condominium;
-use App\Repositories\Interfaces\CondominiumRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 class CondominiumRepository implements CondominiumRepositoryInterface
@@ -48,5 +48,13 @@ class CondominiumRepository implements CondominiumRepositoryInterface
         });
 
         return true;
+    }
+
+    public function filterCondominium($data): LengthAwarePaginator
+    {
+        return Condominium::where('id', 'like', "%$data->condominiumFilter%")
+            ->orWhere('name', 'like', "%$data->condominiumFilter%")
+            ->orWhere('address', 'like', "%$data->condominiumFilter%")
+            ->paginate(10);
     }
 }
