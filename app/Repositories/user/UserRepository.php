@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\user;
 
-use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Resources\ApiResource;
-use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserRepositoryInterface
@@ -60,7 +59,8 @@ class UserRepository implements UserRepositoryInterface
 
     public function filterUser($data): LengthAwarePaginator
     {
-        return User::where('name', 'like', "%$data->userFilter%")
+        return User::where('id', 'like', "%$data->userFilter%")
+            ->orWhere('name', 'like', "%$data->userFilter%")
             ->orWhere('email', 'like', "%$data->userFilter%")
             ->orWhere('condominium_id', '=', $data->userFilter)
             ->paginate(5);
