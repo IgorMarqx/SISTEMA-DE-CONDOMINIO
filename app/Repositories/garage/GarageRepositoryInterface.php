@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Interfaces;
+namespace App\Repositories\garage;
 
 use App\Models\Garage;
 use Illuminate\Database\Eloquent\Collection;
