@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories\Interfaces;
+namespace App\Repositories\user;
 
 use App\Http\Resources\ApiResource;
 use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
-use \Illuminate\Support\Collection;
+use Illuminate\Support\Collection;
 
 interface UserRepositoryInterface
 {
