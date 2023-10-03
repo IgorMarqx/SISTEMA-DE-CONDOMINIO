@@ -4,7 +4,7 @@ namespace App\Services\garage;
 
 use App\Http\Requests\garage\GarageRequest;
 use App\Models\Garage;
-use App\Repositories\Interfaces\GarageRepositoryInterface;
+use App\Repositories\garage\GarageRepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
