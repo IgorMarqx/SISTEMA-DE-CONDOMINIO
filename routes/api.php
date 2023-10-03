@@ -7,6 +7,7 @@ use App\Http\Controllers\user\ApiUserController;
 use App\Http\Controllers\dashboard\ApiAreaController;
 use App\Http\Controllers\dashboard\ApiApartmentController;
 use \App\Http\Controllers\filter\UserFilterController;
+use \App\Http\Controllers\filter\CondominiumFilterController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::middleware(['api.auth'])->group(function () {
     Route::post('/auth/register', [ApiAuthController::class, 'register']);
 
     Route::get('/filter/users', [UserFilterController::class, 'filterUser']);
+    Route::get('/filter/condominium', [CondominiumFilterController::class, 'filterCondominium']);
 
     Route::apiResources([
         'users' => ApiUserController::class,
