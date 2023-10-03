@@ -3,7 +3,7 @@
 namespace App\Services\apartment;
 
 use App\Models\Apartment;
-use App\Repositories\Interfaces\ApartmentRepositoryInterface;
+use App\Repositories\apartment\ApartmentRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 class ApartmentService
