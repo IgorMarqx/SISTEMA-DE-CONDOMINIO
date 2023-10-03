@@ -15,9 +15,8 @@ Rotas que requerem autenticação:
 
 | TIPO | NOME DA ROTA | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
-| `GET`    | `api/auth/register`     |Esta rota serve para verificar o funcionamento da API.|
-| `DELETE`   | `api/users/{id}`     |Esta rota fornece uma resposta JSON de erro de autorização imediatamente.|
-| `PUT/PATCH`     | `api/users/{id} `    |Essa rota permite fazer login na aplicação..|
-| `GET`     | `api/users/{id} `    |Essa rota permite fazer login na aplicação..|
-| `POST`     | `api/users `    |Essa rota permite fazer login na aplicação..|
-| `GET`     | `api/users`    |Essa rota permite fazer login na aplicação..|
+| `GET`    | `api/auth/register`     |Esta rota é responsável pelo registro de usuários.|
+| `DELETE`   | `api/users/{id}`     |Esta rota é responsável pela exclusão de usuários.|
+| `PUT/PATCH`     | `api/users/{id} `    |Essa rota é responsável pela edição dos usuários.|
+| `GET`     | `api/users/{id} `    |Esta rota é responsável por recuperar um usuário específico.|
+| `GET`     | `api/users`    |Esta rota é responsável por recuperar todos os usuários.|
