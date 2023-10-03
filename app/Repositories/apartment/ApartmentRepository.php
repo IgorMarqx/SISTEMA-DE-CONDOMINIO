@@ -1,14 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\apartment;
 
-use App\Http\Resources\apartments\ApartmentShowResource;
-use App\Http\Resources\ApiResource;
 use App\Models\Apartment;
-use App\Models\Garage;
-use App\Repositories\Interfaces\ApartmentRepositoryInterface;
 use Exception;
-use \Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class ApartmentRepository implements ApartmentRepositoryInterface
