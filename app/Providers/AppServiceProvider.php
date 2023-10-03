@@ -4,23 +4,21 @@ namespace App\Providers;
 
 use App\Models\Apartment;
 use App\Models\Condominium;
-
-use App\Repositories\ApartmentRepository;
-use App\Repositories\AreaRepository;
-use App\Repositories\GarageRepository;
-use App\Repositories\Interfaces\ApartmentRepositoryInterface;
-use App\Repositories\Interfaces\AreaRepositoryInterface;
-use App\Repositories\Interfaces\AuthRepositoryInterface;
-use App\Repositories\Interfaces\GarageRepositoryInterface;
-use App\Repositories\Interfaces\UserRepositoryInterface;
-use App\Repositories\UserRepository;
-use App\Repositories\AuthRepository;
-use App\Repositories\CondominiumRepository;
-use App\Repositories\Interfaces\CondominiumRepositoryInterface;
-
+use App\Repositories\apartment\ApartmentRepository;
+use App\Repositories\apartment\ApartmentRepositoryInterface;
+use App\Repositories\area\AreaRepository;
+use App\Repositories\area\AreaRepositoryInterface;
+use App\Repositories\auth\AuthRepository;
+use App\Repositories\auth\AuthRepositoryInterface;
+use App\Repositories\condominium\CondominiumRepository;
+use App\Repositories\condominium\CondominiumRepositoryInterface;
+use App\Repositories\garage\GarageRepository;
+use App\Repositories\garage\GarageRepositoryInterface;
+use App\Repositories\user\UserRepository;
+use App\Repositories\user\UserRepositoryInterface;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
