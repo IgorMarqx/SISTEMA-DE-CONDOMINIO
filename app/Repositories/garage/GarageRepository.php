@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\garage;
 
 use App\Models\Garage;
-use App\Repositories\Interfaces\GarageRepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
