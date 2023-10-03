@@ -3,7 +3,7 @@
 namespace App\Services\area;
 
 use App\Models\Area;
-use App\Repositories\Interfaces\AreaRepositoryInterface;
+use App\Repositories\area\AreaRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 class AreaService
