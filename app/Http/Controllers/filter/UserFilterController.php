@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\filter;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\filters\UserFilterRequest;
+use App\Http\Requests\filters\user\UserFilterRequest;
+use App\Http\Resources\ApiResource;
 use App\Services\user\UserService;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -16,8 +17,14 @@ class UserFilterController extends Controller
         $this->userService = $userService;
     }
 
-    public function filterUser(UserFilterRequest $user): LengthAwarePaginator
+    public function filterUser(UserFilterRequest $user): LengthAwarePaginator|ApiResource
     {
-        return $this->userService->filterUser($user);
+        $filter = $this->userService->filterUser($user);
+
+        if(!$filter){
+            return new ApiResource(['error' => true, 'message' => 'Nenhum usuário encontrado'], 404);
+        }
+
+        return $filter;
     }
 }
