@@ -3,8 +3,9 @@
 namespace App\Services\condominium;
 
 use App\Models\Condominium;
-use App\Repositories\Interfaces\CondominiumRepositoryInterface;
+use App\Repositories\condominium\CondominiumRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CondominiumService
 {
@@ -56,4 +57,14 @@ class CondominiumService
         return $this->condominiumRepository->deleteCondominium($condominium);
     }
 
+    public function filterCondominium($data): LengthAwarePaginator|null
+    {
+        $filter = $this->condominiumRepository->filterCondominium($data);
+
+        if($filter->isEmpty()){
+            return null;
+        }
+
+        return $filter;
+    }
 }
