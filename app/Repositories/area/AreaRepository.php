@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\area;
 
 use App\Models\Area;
-use App\Repositories\Interfaces\AreaRepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
