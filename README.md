@@ -7,4 +7,17 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 
 | TIPO | NOME DA ROTA | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
-| GET     | api/ping     |Essa rota foi feita para testar se a API está funcionando     |
+| `GET`    | `api/ping`     |Esta rota serve para verificar o funcionamento da API.|
+| `GET`   | `api/unauthorized`     |Esta rota fornece uma resposta JSON de erro de autorização imediatamente.|
+| `POST`     | `api/auth/login `    |Essa rota permite fazer login na aplicação.|
+
+Rotas que requerem autenticação:
+
+| TIPO | NOME DA ROTA | O QUE ELA FAZ |
+|-----------------------|-----------------------|-----------------------|
+| `GET`    | `api/auth/register`     |Esta rota serve para verificar o funcionamento da API.|
+| `DELETE`   | `api/users/{id}`     |Esta rota fornece uma resposta JSON de erro de autorização imediatamente.|
+| `PUT/PATCH`     | `api/users/{id} `    |Essa rota permite fazer login na aplicação..|
+| `GET`     | `api/users/{id} `    |Essa rota permite fazer login na aplicação..|
+| `POST`     | `api/users `    |Essa rota permite fazer login na aplicação..|
+| `GET`     | `api/users`    |Essa rota permite fazer login na aplicação..|
