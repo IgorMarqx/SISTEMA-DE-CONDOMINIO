@@ -3,7 +3,7 @@
 namespace App\Services\auth;
 
 use App\Models\User;
-use App\Repositories\Interfaces\AuthRepositoryInterface;
+use App\Repositories\auth\AuthRepositoryInterface;
 
 class AuthService
 {
