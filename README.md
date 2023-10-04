@@ -9,10 +9,11 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 - [Rota de apartamentos](#apartamentos)
 
 ## Sistema de autenticação JWT
-Nessa API foi utilizado um sistema de autenticação chamado JWT, para usar ele é necessario implementar na sua env o seguinte campo
+Nessa API foi utilizado um sistema de autenticação chamado JWT, para usar ele é necessario implementar na sua env o seguinte campo.
+Você precisa gerar um seu token com o seguinte comando: `php artisan jwt:secret`
 
 ```env
-JWT_SECRET=
+JWT_SECRET=(token-de-acesso)
 ```
 
 ## End-Points
