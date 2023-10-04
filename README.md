@@ -146,4 +146,23 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 
 ***
 
+- Esta rota é responsável pela edição das areas.
+    ```http
+    PUT api/areas/{id}
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `id`    | `string/integer`     |required|
+
+***
+- Esta rota é responsável pela exclusão das areas.
+    ```http
+    DELETE api/areas/{id}
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `id`    | `string/integer`     |required|
+
+***
+
 
