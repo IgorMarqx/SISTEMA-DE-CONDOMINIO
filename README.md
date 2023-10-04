@@ -26,6 +26,12 @@ Rode as migrations:
 $ php artisan migrate
 ```
 
+## Escopo geral da API
+Esta API foi desenvolvida utilizando a estrutura de pastas fornecida pelo Laravel, proporcionando uma organização exemplar. Foi utilizado a seguinte estrutura.
+
+- Repository Pattern
+  * Na pasta `app`, você encontrará a pasta `repositories`, onde estão organizadas as respectivas subpastas contendo cada classe de repository e suas interfaces correspondentes. Todas as operações de banco de dados foram realizadas exclusivamente através desses repositórios.
+
 ## Sistema de autenticação JWT
 <a id="jwt"></a>
 Esta API utiliza um sistema de autenticação chamado JWT (JSON Web Token). Para começar a usá-lo, você deve adicionar um campo à sua variável de ambiente.<br>
