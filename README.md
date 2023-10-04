@@ -10,7 +10,7 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 
 ## Sistema de autenticação JWT
 Esta API utiliza um sistema de autenticação chamado JWT (JSON Web Token). Para começar a usá-lo, você deve adicionar um campo à sua variável de ambiente.<br>
-Para gerar seu próprio token JWT, execute o seguinte comando: ´php artisan jwt:secret´.
+Para gerar seu próprio token JWT, execute o seguinte comando: `php artisan jwt:secret`.
 
 ```env
 JWT_SECRET=(token-de-acesso)
