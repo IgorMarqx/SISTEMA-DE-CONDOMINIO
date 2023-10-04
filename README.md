@@ -9,6 +9,7 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 5. [Rota de apartamentos](#apartamentos)
 6. [JWT](#jwt)
 7. [Migrations](#migrations)
+7. [Autor](#author)
 
 
 ## Sistema de autenticação JWT
@@ -238,5 +239,9 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
     | `id`    | `string/integer`     |required|
 
 ***
+
+## Autor
+<a name="author"></a>
+
 
 
