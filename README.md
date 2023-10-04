@@ -20,6 +20,12 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 $ composer install
 ```
 
+Rode as migrations:
+
+```php
+$ php artisan migrate
+```
+
 ## Sistema de autenticação JWT
 <a id="jwt"></a>
 Esta API utiliza um sistema de autenticação chamado JWT (JSON Web Token). Para começar a usá-lo, você deve adicionar um campo à sua variável de ambiente.<br>
