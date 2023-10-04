@@ -89,36 +89,36 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
     |-----------------------|-----------------------|-----------------------|
     | `condominiumFilter`    | `string/integer`     |required|
     
-    ***
+***
 
 - Esta rota é responsável pelo registro de condominios.
-```http
-POST api/condominium
-```
-| PARAMETROS | TIPOS | DESCRIÇÃO |
-|-----------------------|-----------------------|-----------------------|
-| `name`    | `string/integer`     |required/unique|
-| `address`    | `string/integer`     |required/unique|
+    ```http
+    POST api/condominium
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `name`    | `string/integer`     |required/unique|
+    | `address`    | `string/integer`     |required/unique|
 
 ***
 
 - Esta rota é responsável pela exclusão de condominios.
-```http
-DELETE api/condominium/{id}
-```
-| PARAMETROS | TIPOS | DESCRIÇÃO |
-|-----------------------|-----------------------|-----------------------|
-| `id`    | `string/integer`     |required|
+    ```http
+    DELETE api/condominium/{id}
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `id`    | `string/integer`     |required|
 
 ***
 
 - Esta rota é responsável pela edição dos condominios.
-```http
-PUT api/condominium/{id}
-```
-| PARAMETROS | TIPOS | DESCRIÇÃO |
-|-----------------------|-----------------------|-----------------------|
-| `id`    | `string/integer`     |required|
+    ```http
+    PUT api/condominium/{id}
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `id`    | `string/integer`     |required|
 
 ***
 
