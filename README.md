@@ -21,14 +21,14 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ***
 
 - Esta rota é responsável pela filtragem de usuários.
-```http
-GET api/filter/users
-```
-| PARAMETROS | TIPOS | DESCRIÇÃO |
-|-----------------------|-----------------------|-----------------------|
-| `userFilter`    | `string/integer`     |required|
-
-***
+    ```http
+    GET api/filter/users
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `userFilter`    | `string/integer`     |required|
+    
+    ***
 
 - Esta rota é responsável pelo registro de usuários.
 ```http
