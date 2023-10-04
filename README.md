@@ -8,9 +8,9 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
   <a href="#condominios">Rota de condomínios</a> •
   <a href="#areas">Rota de áreas</a> •
   <a href="#apartamentos">Rota de apartamentos</a> •
-  <a href="#jwt">JWT</a>
-  <a href="#migrations">Migrations</a>
-  <a href="#author">Autor</a>
+  <a href="#jwt">JWT</a> •
+  <a href="#migrations">Migrations</a> •
+  <a href="#author">Autor</a> •
 </p>
 
 ## Sistema de autenticação JWT
