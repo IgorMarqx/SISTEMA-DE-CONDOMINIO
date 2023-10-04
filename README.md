@@ -28,49 +28,49 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
     |-----------------------|-----------------------|-----------------------|
     | `userFilter`    | `string/integer`     |required|
     
-    ***
+***
 
 - Esta rota é responsável pelo registro de usuários.
-```http
-POST api/auth/register
-```
-| PARAMETROS | TIPOS | DESCRIÇÃO |
-|-----------------------|-----------------------|-----------------------|
-| `name`    | `string`     |required|
-| `email`    | `string`     |required/email/unique|
-| `password`    | `string/integer`     |required/confirmed/min:5|
-| `password_confirmation`    | `string/integer`     |min:5|
-| `condominium_id`    | `integer`     |required/numeric/condominium_exists|
+    ```http
+    POST api/auth/register
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `name`    | `string`     |required|
+    | `email`    | `string`     |required/email/unique|
+    | `password`    | `string/integer`     |required/confirmed/min:5|
+    | `password_confirmation`    | `string/integer`     |min:5|
+    | `condominium_id`    | `integer`     |required/numeric/condominium_exists|
 
 ***
 
 - Esta rota é responsável pela exclusão de usuários.
-```http
-DELETE api/users/{id}
-```
-| PARAMETROS | TIPOS | DESCRIÇÃO |
-|-----------------------|-----------------------|-----------------------|
-| `id`    | `string/integer`     |required|
+    ```http
+    DELETE api/users/{id}
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `id`    | `string/integer`     |required|
 
 ***
 
 - Esta rota é responsável pela exclusão de usuários.
-```http
-DELETE api/users/{id}
-```
-| PARAMETROS | TIPOS | DESCRIÇÃO |
-|-----------------------|-----------------------|-----------------------|
-| `id`    | `string/integer`     |required|
+    ```http
+    DELETE api/users/{id}
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `id`    | `string/integer`     |required|
 
 ***
 
 - Essa rota é responsável pela edição dos usuários
-```http
-PUT api/users/{id}
-```
-| PARAMETROS | TIPOS | DESCRIÇÃO |
-|-----------------------|-----------------------|-----------------------|
-| `id`    | `string/integer`     |required|
+    ```http
+    PUT api/users/{id}
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `id`    | `string/integer`     |required|
 
 ***
 
@@ -82,14 +82,14 @@ PUT api/users/{id}
 | `GET`     | `api/condominium`    |Esta rota é responsável por recuperar todos os condominios.|
 
 - Esta rota é responsável pela filtragem de condominios.
-```http
-GET api/filter/condominium
-```
-| PARAMETROS | TIPOS | DESCRIÇÃO |
-|-----------------------|-----------------------|-----------------------|
-| `condominiumFilter`    | `string/integer`     |required|
-
-***
+    ```http
+    GET api/filter/condominium
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `condominiumFilter`    | `string/integer`     |required|
+    
+    ***
 
 - Esta rota é responsável pelo registro de condominios.
 ```http
