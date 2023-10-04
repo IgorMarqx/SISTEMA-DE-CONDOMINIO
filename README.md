@@ -22,6 +22,13 @@ Para gerar seu próprio token JWT, execute o seguinte comando: `php artisan jwt:
 JWT_SECRET=(token-de-acesso)
 ```
 
+Após a configuração inicial, basta acessar a rota de login e fornecer um usuário válido para gerar um `TOKEN`.
+Com o `TOKEN` gerado você deve ir em seu aplicativo que testa a API e colocar nos headers o seguintes campos:
+
+```http
+Authorization Bearer (token-de-acesso)
+```
+
 ## Rodando as migrations
 <a id="migrations"></a>
 Antes de tudo, é necessário executar as `migrations`. Foi implementado seeders e factories para simplificar os testes da API. Caso deseje, basta executar o seguinte comando para preencher o banco de dados de maneira adequada.
