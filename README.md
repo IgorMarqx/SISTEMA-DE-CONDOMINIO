@@ -23,9 +23,9 @@ JWT_SECRET=(token-de-acesso)
 ```
 
 Após a configuração inicial, basta acessar a rota de login e fornecer um usuário válido para gerar um `TOKEN`.
-Com o `TOKEN` gerado você deve ir em seu aplicativo que testa a API e colocar nos headers o seguintes campos:
+Com o `TOKEN` gerado, você deve acessar o seu aplicativo de teste da API e inserir os seguintes campos nos headers:
 
-```http
+```bash
 Authorization Bearer (token-de-acesso)
 ```
 
