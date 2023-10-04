@@ -32,7 +32,8 @@ Com o `TOKEN` gerado, você deve acessar o seu aplicativo de teste da API e inse
 
 ## Rodando as migrations
 <a id="migrations"></a>
-Antes de tudo, é necessário executar as `migrations`. Foi implementado seeders e factories para simplificar os testes da API. Caso deseje, basta executar o seguinte comando para preencher o banco de dados de maneira adequada.
+Antes de tudo, é necessário executar as `migrations`. Foi implementado seeders e factories para simplificar os testes da API. <br>
+Caso deseje, basta executar o seguinte comando para preencher o banco de dados de maneira adequada.
 
 ```php
 $ php artisan migrate --seed
