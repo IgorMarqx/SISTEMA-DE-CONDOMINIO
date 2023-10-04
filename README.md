@@ -3,6 +3,10 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 
 ## Tópicos
 - [End-points](#end-points)
+- [Rota de usuários](#usuarios)
+- [Rota de condominios](#condominios)
+- [Rota de areas](#areas)
+- [Rota de apartamentos](#apartamentos)
 
 ## End-Points
 <a name="end-points"></a>
@@ -16,6 +20,7 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 | `POST`     | `api/auth/login `    |Essa rota permite fazer login na aplicação.|
 
 ### Rotas de usuários: `users`
+<a name="usuarios"></a>
 
 | TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
@@ -79,6 +84,7 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ***
 
 ### Rotas de condominios: `condominium`
+<a name="condominios"></a>
 
 | TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
@@ -127,6 +133,7 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ***
 
 ## Rotas de areas: `areas`
+<a name="areas"></a>
 
 | TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
@@ -170,6 +177,7 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ***
 
 ## Rotas de apartamentos: `apartment`
+<a name="apartamentos"></a>
 
 
 | TIPO | END-POINT | O QUE ELA FAZ |
