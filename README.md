@@ -1,12 +1,12 @@
 # Condominio API
 Esta API tem como principal finalidade o gerenciamento de sistemas de condomínio. Ela oferece funcionalidades para criar e administrar condomínios, áreas comuns, apartamentos, garagens e usuários.
 
-## Tópicos
-- [End-points](#end-points)
-- [Rota de usuários](#usuarios)
-- [Rota de condominios](#condominios)
-- [Rota de areas](#areas)
-- [Rota de apartamentos](#apartamentos)
+# Tópicos
+1. [End-points](#end-points)
+2. [Rota de usuários](#usuarios)
+3. [Rota de condomínios](#condominios)
+4. [Rota de áreas](#areas)
+5. [Rota de apartamentos](#apartamentos)
 
 ## Sistema de autenticação JWT
 Esta API utiliza um sistema de autenticação chamado JWT (JSON Web Token). Para começar a usá-lo, você deve adicionar um campo à sua variável de ambiente.<br>
