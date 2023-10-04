@@ -165,4 +165,6 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 
 ***
 
+## Rotas de apartamentos: `apartment`
+
 
