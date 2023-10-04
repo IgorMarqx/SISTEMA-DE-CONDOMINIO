@@ -3,6 +3,7 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 
 ## Tópicos
 <p align="center">
+  <a href="#getting-start">Primeiros passos</a> •
   <a href="#end-points">End-points</a> •
   <a href="#usuarios">Rota de usuários</a> •
   <a href="#condominios">Rota de condomínios</a> •
@@ -29,6 +30,7 @@ Esta API foi desenvolvida utilizando a estrutura de pastas fornecida pelo Larave
 
 
 ## Primeiros passos
+<a id="getting-start"></a>
 É necessário rodar o composer para poder gerar todas as dependências necessárias:
 
 ```php
