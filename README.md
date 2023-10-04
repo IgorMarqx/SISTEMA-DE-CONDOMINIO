@@ -13,6 +13,13 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
   <a href="#author">Autor</a>
 </p>
 
+## Primeiros passos
+É necessário rodar o composer para poder gerar todas as dependências necessárias:
+
+```php
+$ composer install
+```
+
 ## Sistema de autenticação JWT
 <a id="jwt"></a>
 Esta API utiliza um sistema de autenticação chamado JWT (JSON Web Token). Para começar a usá-lo, você deve adicionar um campo à sua variável de ambiente.<br>
