@@ -52,7 +52,7 @@ Caso deseje utilizar, basta executar o seguinte comando para preencher o banco d
 $ php artisan migrate --seed
 ```
 
-Caso anteriormente já tenha executado as migrations, rode o seguinte comando para utilizar os seeders:
+Caso anteriormente já tenha executado as migrations se as seeders, rode o seguinte comando para utilizar os seeders:
 
 ```php
 $ php artisan migrate:fresh --seed
