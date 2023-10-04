@@ -29,9 +29,6 @@ Com o `TOKEN` gerado, você deve acessar o seu aplicativo de teste da API e inse
 |-----------------------|-----------------------|
 | `Authorization`    | `Bearer (token-de-acesso)`     |
 
-```bash
-Authorization Bearer (token-de-acesso)
-```
 
 ## Rodando as migrations
 <a id="migrations"></a>
