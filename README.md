@@ -19,8 +19,8 @@ JWT_SECRET=(token-de-acesso)
 ## Rodando o projeto
 Antes de tudo você deve rodar suas migrations. Foi implementado seeders e factories para facilitar o teste da API, caso você queria basta rodar o seguinte comando que ele irá popular todo o banco da forma correta.
 
-```artisan
-php artisan migrate --seed
+```php
+$ php artisan migrate --seed
 ```
 
 ## End-Points
