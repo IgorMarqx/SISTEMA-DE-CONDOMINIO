@@ -122,3 +122,11 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 
 ***
 
+## Rotas de areas: `areas`
+
+| TIPO | END-POINT | O QUE ELA FAZ |
+|-----------------------|-----------------------|-----------------------|
+| `GET`     | `api/areas/{id}`    |Esta rota é responsável por recuperar uma area específico.|
+| `GET`     | `api/areas`    |Esta rota é responsável por recuperar todos as areas.|
+
+
