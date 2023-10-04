@@ -15,10 +15,10 @@ Rotas de usuários: `users`
 
 | TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
-| `DELETE`   | `api/users/{id}`     |Esta rota é responsável pela exclusão de usuários.|
-| `PUT/PATCH`     | `api/users/{id} `    |Essa rota é responsável pela edição dos usuários.|
 | `GET`     | `api/users/{id} `    |Esta rota é responsável por recuperar um usuário específico.|
 | `GET`     | `api/users`    |Esta rota é responsável por recuperar todos os usuários.|
+
+***
 
 ```http
 GET api/filter/users
@@ -27,6 +27,8 @@ Esta rota é responsável pela filtragem de usuários.
 | PARAMETROS | TIPOS | DESCRIÇÃO |
 |-----------------------|-----------------------|-----------------------|
 | `userFilter`    | `string/integer`     |required|
+
+***
 
 ```http
 POST api/auth/register
@@ -40,6 +42,37 @@ Esta rota é responsável pelo registro de usuários.
 | `password_confirmation`    | `string/integer`     |min:5|
 | `condominium_id`    | `integer`     |required/numeric/condominium_exists|
 
+***
+
+```http
+DELETE api/users/{id}
+```
+Esta rota é responsável pela exclusão de usuários.
+| PARAMETROS | TIPOS | DESCRIÇÃO |
+|-----------------------|-----------------------|-----------------------|
+| `id`    | `string/integer`     |required|
+
+***
+
+```http
+DELETE api/users/{id}
+```
+Esta rota é responsável pela exclusão de usuários.
+| PARAMETROS | TIPOS | DESCRIÇÃO |
+|-----------------------|-----------------------|-----------------------|
+| `id`    | `string/integer`     |required|
+
+***
+
+```http
+PUT api/users/{id}
+```
+Essa rota é responsável pela edição dos usuários
+| PARAMETROS | TIPOS | DESCRIÇÃO |
+|-----------------------|-----------------------|-----------------------|
+| `id`    | `string/integer`     |required|
+
+***
 
 Rotas de condominios: `condominium`
 
