@@ -4,14 +4,14 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 ## Tópicos
 <p align="center">
   <a href="#getting-start">Primeiros passos 📗</a> •
-  <a href="#end-points">End-points</a> •
-  <a href="#usuarios">Rota de usuários</a> •
-  <a href="#condominios">Rota de condomínios</a> •
-  <a href="#areas">Rota de áreas</a> •
-  <a href="#apartamentos">Rota de apartamentos</a> •
-  <a href="#jwt">JWT</a> •
-  <a href="#migrations">Migrations</a> •
-  <a href="#author">Autor</a>
+  <a href="#end-points">End-points ✨</a> •
+  <a href="#usuarios">Rota de usuários 🙍‍♂️</a> •
+  <a href="#condominios">Rota de condomínios 🏢</a> •
+  <a href="#areas">Rota de áreas 🛝</a> •
+  <a href="#apartamentos">Rota de apartamentos 🌆</a> •
+  <a href="#jwt">JWT 🔥</a> •
+  <a href="#migrations">Migrations 🛸</a> •
+  <a href="#author">Autor 💎</a>
 </p>
 
 ## Escopo geral da API
