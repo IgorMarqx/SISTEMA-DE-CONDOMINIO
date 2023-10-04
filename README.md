@@ -6,19 +6,12 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
   <a href="#end-points">End-points</a> •
   <a href="#usuarios">Rota de usuários</a> •
   <a href="#condominios">Rota de condomínios</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
+  <a href="#areas">Rota de áreas</a> •
+  <a href="#apartamentos">Rota de apartamentos</a> •
+  <a href="#jwt">JWT</a>
+  <a href="#migrations">Migrations</a>
+  <a href="#author">Autor</a>
 </p>
-
-- [End-points](#end-points)
-- 2. [Rota de usuários](#usuarios)  - 3. [Rota de condomínios](#condominios)
-4. [Rota de áreas](#areas)
-5. [Rota de apartamentos](#apartamentos)
-6. [JWT](#jwt)
-7. [Migrations](#migrations)
-7. [Autor](#author)
-
 
 ## Sistema de autenticação JWT
 <a id="jwt"></a>
