@@ -243,5 +243,6 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ## Autor
 <a name="author"></a>
 
+- ***Igor Marques de Azevedo*** - [Linkedin](https://www.linkedin.com/in/igor-marques-azevedo/)
 
 
