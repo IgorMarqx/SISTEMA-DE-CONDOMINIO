@@ -7,8 +7,12 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 3. [Rota de condomínios](#condominios)
 4. [Rota de áreas](#areas)
 5. [Rota de apartamentos](#apartamentos)
+6. [JWT](#jwt)
+7. [Migrations](#migrations)
+
 
 ## Sistema de autenticação JWT
+<a name="jwt"></a>
 Esta API utiliza um sistema de autenticação chamado JWT (JSON Web Token). Para começar a usá-lo, você deve adicionar um campo à sua variável de ambiente.<br>
 Para gerar seu próprio token JWT, execute o seguinte comando: `php artisan jwt:secret`.
 
@@ -17,6 +21,7 @@ JWT_SECRET=(token-de-acesso)
 ```
 
 ## Rodando as migrations
+<a name="migrations"></a>
 Antes de tudo, é necessário executar as `migrations`. Foi implementado seeders e factories para simplificar os testes da API. Caso deseje, basta executar o seguinte comando para preencher o banco de dados de maneira adequada.
 
 ```php
