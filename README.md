@@ -2,9 +2,17 @@
 Esta API tem como principal finalidade o gerenciamento de sistemas de condomínio. Ela oferece funcionalidades para criar e administrar condomínios, áreas comuns, apartamentos, garagens e usuários.
 
 ## Tópicos
-1. [End-points](#end-points)
-2. [Rota de usuários](#usuarios)
-3. [Rota de condomínios](#condominios)
+<p align="center">
+  <a href="#end-points">End-points</a> •
+  <a href="#usuarios">Rota de usuários</a> •
+  <a href="#condominios">Rota de condomínios</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#related">Related</a> •
+  <a href="#license">License</a>
+</p>
+
+- [End-points](#end-points)
+- 2. [Rota de usuários](#usuarios)  - 3. [Rota de condomínios](#condominios)
 4. [Rota de áreas](#areas)
 5. [Rota de apartamentos](#apartamentos)
 6. [JWT](#jwt)
@@ -13,7 +21,7 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 
 
 ## Sistema de autenticação JWT
-<a name="jwt"></a>
+<a id="jwt"></a>
 Esta API utiliza um sistema de autenticação chamado JWT (JSON Web Token). Para começar a usá-lo, você deve adicionar um campo à sua variável de ambiente.<br>
 Para gerar seu próprio token JWT, execute o seguinte comando: `php artisan jwt:secret`.
 
@@ -22,7 +30,7 @@ JWT_SECRET=(token-de-acesso)
 ```
 
 ## Rodando as migrations
-<a name="migrations"></a>
+<a id="migrations"></a>
 Antes de tudo, é necessário executar as `migrations`. Foi implementado seeders e factories para simplificar os testes da API. Caso deseje, basta executar o seguinte comando para preencher o banco de dados de maneira adequada.
 
 ```php
@@ -30,7 +38,7 @@ $ php artisan migrate --seed
 ```
 
 ## End-Points
-<a name="end-points"></a>
+<a id="end-points"></a>
 
 Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a necessidade de autenticação:
 
@@ -41,7 +49,7 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 | `POST`     | `api/auth/login `    |Essa rota permite fazer login na aplicação.|
 
 ### Rotas de usuários: `users`
-<a name="usuarios"></a>
+<a id="usuarios"></a>
 
 | TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
@@ -105,7 +113,7 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ***
 
 ### Rotas de condominios: `condominium`
-<a name="condominios"></a>
+<a id="condominios"></a>
 
 | TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
@@ -154,7 +162,7 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ***
 
 ## Rotas de areas: `areas`
-<a name="areas"></a>
+<a id="areas"></a>
 
 | TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
@@ -198,7 +206,7 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ***
 
 ## Rotas de apartamentos: `apartment`
-<a name="apartamentos"></a>
+<a id="apartamentos"></a>
 
 
 | TIPO | END-POINT | O QUE ELA FAZ |
@@ -241,7 +249,7 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ***
 
 ## Autor
-<a name="author"></a>
+<a id="author"></a>
 
 - ***Igor Marques de Azevedo*** - [Linkedin](https://www.linkedin.com/in/igor-marques-azevedo/)
 
