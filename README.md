@@ -132,9 +132,9 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ***
 
 - Esta rota é responsável pela criação das areas.
-  * Para a criação dos condominios é necessário antes ter criado algum condominio
+  * Para a criação das areas é necessário antes ter criado algum condominio
   ```http
-  POST api/condominium/{id}
+  POST api/areas
   ```
   | PARAMETROS | TIPOS | DESCRIÇÃO |
   |-----------------------|-----------------------|-----------------------|
@@ -166,5 +166,45 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 ***
 
 ## Rotas de apartamentos: `apartment`
+
+
+| TIPO | END-POINT | O QUE ELA FAZ |
+|-----------------------|-----------------------|-----------------------|
+| `GET`     | `api/apartment/{id}`    |Esta rota é responsável por recuperar uma apartamento específico.|
+| `GET`     | `api/apartment`    |Esta rota é responsável por recuperar todos os apartamentos.|
+
+***
+
+- Esta rota é responsável pela criação das areas.
+  * Para a criação dos apartamentos é necessário antes ter criado algum condominio
+  ```http
+  POST api/apartment
+  ```
+  | PARAMETROS | TIPOS | DESCRIÇÃO |
+  |-----------------------|-----------------------|-----------------------|
+  | `identify`    | `string/integer`     |required|
+  | `condominium_id`    | `integer`     |required/numeric/condominium_exists|
+
+***
+
+- Esta rota é responsável pela edição dos apartamentos.
+    ```http
+    PUT api/apartment/{id}
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `id`    | `string/integer`     |required|
+
+***
+
+- Esta rota é responsável pela exclusão dos apartamentos.
+    ```http
+    DELETE api/apartment/{id}
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `id`    | `string/integer`     |required|
+
+***
 
 
