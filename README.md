@@ -11,8 +11,8 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 ## Sistema de autenticação JWT
 Nessa API foi utilizado um sistema de autenticação chamado JWT, para usar ele é necessario implementar na sua env o seguinte campo
 
-```.env
-JWT_SECRET
+```env
+JWT_SECRET=
 ```
 
 ## End-Points
