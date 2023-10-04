@@ -15,12 +15,31 @@ Rotas de usuários: `users`
 
 | TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
-| `GET`    | `api/auth/register`     |Esta rota é responsável pelo registro de usuários.|
 | `DELETE`   | `api/users/{id}`     |Esta rota é responsável pela exclusão de usuários.|
 | `PUT/PATCH`     | `api/users/{id} `    |Essa rota é responsável pela edição dos usuários.|
 | `GET`     | `api/users/{id} `    |Esta rota é responsável por recuperar um usuário específico.|
-| `GET`     | `api/filter/users`    |Esta rota é responsável pela filtragem de usuários.|
 | `GET`     | `api/users`    |Esta rota é responsável por recuperar todos os usuários.|
+
+```http
+GET api/filter/users
+```
+Esta rota é responsável pela filtragem de usuários.
+| PARAMETROS | TIPOS | DESCRIÇÃO |
+|-----------------------|-----------------------|-----------------------|
+| `userFilter`    | `string/integer`     |required|
+
+```http
+POST api/auth/register
+```
+Esta rota é responsável pelo registro de usuários.
+| PARAMETROS | TIPOS | DESCRIÇÃO |
+|-----------------------|-----------------------|-----------------------|
+| `name`    | `string`     |required|
+| `email`    | `string`     |required/email/unique|
+| `password`    | `string/integer`     |required/confirmed/min:5|
+| `password_confirmation`    | `string/integer`     |min:5|
+| `condominium_id`    | `integer`     |required/numeric/condominium_exists|
+
 
 Rotas de condominios: `condominium`
 
