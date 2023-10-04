@@ -129,4 +129,21 @@ Esta API disponibiliza três endpoints que podem ser acessados livremente, sem a
 | `GET`     | `api/areas/{id}`    |Esta rota é responsável por recuperar uma area específico.|
 | `GET`     | `api/areas`    |Esta rota é responsável por recuperar todos as areas.|
 
+***
+
+- Esta rota é responsável pela criação das areas.
+  * Para a criação dos condominios é necessário antes ter criado algum condominio
+    ```http
+    POST api/condominium/{id}
+    ```
+    | PARAMETROS | TIPOS | DESCRIÇÃO |
+    |-----------------------|-----------------------|-----------------------|
+    | `name`    | `string/integer`     |required|
+    | `days`    | `date`     |required/date_format:Y-m-d|
+    | `start_time`    | `time`     |required/date_format:H:i:s|
+    | `end_time`    | `time`     |required/date_format:H:i:s|
+    | `condominium_id`    | `integer`     |required/numeric/condominium_exists|
+
+***
+
 
