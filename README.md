@@ -78,9 +78,48 @@ Rotas de condominios: `condominium`
 
 | TIPO | END-POINT | O QUE ELA FAZ |
 |-----------------------|-----------------------|-----------------------|
-| `GET`    | `api/condominium`     |Esta rota é responsável pelo registro de condominios.|
-| `DELETE`   | `api/condominium/{id}`     |Esta rota é responsável pela exclusão de condominios.|
-| `PUT/PATCH`     | `api/condominium/{id} `    |Essa rota é responsável pela edição dos condominios.|
 | `GET`     | `api/condominium/{id}`    |Esta rota é responsável por recuperar um condominio específico.|
-| `GET`     | `api/filter/condominium`    |Esta rota é responsável pela filtragem de condominios.|
 | `GET`     | `api/condominium`    |Esta rota é responsável por recuperar todos os condominios.|
+
+```http
+GET api/filter/condominium
+```
+Esta rota é responsável pela filtragem de condominios.
+| PARAMETROS | TIPOS | DESCRIÇÃO |
+|-----------------------|-----------------------|-----------------------|
+| `condominiumFilter`    | `string/integer`     |required|
+
+***
+
+```http
+POST api/condominium
+```
+Esta rota é responsável pelo registro de condominios.
+| PARAMETROS | TIPOS | DESCRIÇÃO |
+|-----------------------|-----------------------|-----------------------|
+| `name`    | `string/integer`     |required/unique|
+| `address`    | `string/integer`     |required/unique|
+
+***
+
+```http
+DELETE api/condominium/{id}
+```
+Esta rota é responsável pela exclusão de condominios.
+| PARAMETROS | TIPOS | DESCRIÇÃO |
+|-----------------------|-----------------------|-----------------------|
+| `id`    | `string/integer`     |required|
+
+***
+
+
+```http
+PUT api/condominium/{id}
+```
+Essa rota é responsável pela edição dos condominios.
+| PARAMETROS | TIPOS | DESCRIÇÃO |
+|-----------------------|-----------------------|-----------------------|
+| `id`    | `string/integer`     |required|
+
+***
+
