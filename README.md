@@ -22,7 +22,7 @@ Esta API foi desenvolvida utilizando a estrutura de pastas fornecida pelo Larave
 - Services:
   * Nessa pasta, você encontrará todas as subpastas correspondentes contendo as validações para as operações do banco de dados. Os services englobam todas as validações, incluindo a verificação do correto preenchimento do ID do usuário para operações de exclusão e atualização.
 - Controllers:
-  * O funcionamento dos controladores segue um padrão consistente para todos. Cada controlador possui um construtor que chama a classe de serviços correspondete à aquele controlador, e cada método recebe parâmetros dos serviços e retorna uma validação padrão. Esses controladores estão organizados em subpastas, onde cada um deles reside em sua respectiva subpasta. Além disso, há uma pasta chamada `filters`, que abriga os controladores responsáveis pelas rotas de filtragem de dados.
+  * O funcionamento dos controladores segue um padrão consistente para todos. Cada controlador possui um construtor que chama a classe de serviços correspondente à aquele controlador, e cada método recebe parâmetros dos serviços e retorna uma validação padrão. Esses controladores estão organizados em subpastas, onde cada um deles reside em sua respectiva subpasta. Além disso, há uma pasta chamada `filters`, que abriga os controladores responsáveis pelas rotas de filtragem de dados.
 - Requests:
   * Seguindo um padrão distinto para a validação dos dados de entrada, estamos empregando uma abordagem denominada `Request Forms`, um padrão do Laravel que assume a responsabilidade de manipular os dados de entrada para cada endpoint. Além disso, esse padrão também executa a validação para garantir que não haja incompatibilidade nos dados enviados.
 - Resources:
