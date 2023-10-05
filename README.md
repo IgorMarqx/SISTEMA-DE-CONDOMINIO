@@ -28,7 +28,7 @@ Esta API foi desenvolvida utilizando a estrutura de pastas fornecida pelo Larave
 - Resources:
   * Estamos adotando um padrão consistente para as respostas da API, utilizando os recursos `(resources)` do Laravel. Esse padrão uniformiza todas as respostas da API, garantindo que cada controlador utilize esse formato padronizado para as saídas.
 - Providers:
-  * Dentro da pasta de providers, existe um arquivo chamado `AppServiceProvider`, que é o local onde todos os registros das interfaces dos repositórios são feitos. Além disso, esses registros são configurados usando o padrão singleton.
+  * Dentro da pasta de providers, existe um arquivo chamado `AppServiceProvider`, onde você encontra todos os registros das interfaces dos repositórios. Além disso, esses registros são configurados usando o padrão singleton.
 
 
 ## Primeiros passos
