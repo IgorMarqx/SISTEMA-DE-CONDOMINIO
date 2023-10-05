@@ -24,7 +24,7 @@ Esta API foi desenvolvida utilizando a estrutura de pastas fornecida pelo Larave
 - Controllers:
   * O funcionamento dos controladores segue um padrão consistente para todos. Cada controlador possui um construtor que chama a classe de serviços correspondente à aquele controlador, e cada método recebe parâmetros dos serviços e retorna uma validação padrão. Esses controladores estão organizados em subpastas, onde cada um deles reside em sua respectiva subpasta. Além disso, há uma pasta chamada `filters`, que abriga os controladores responsáveis pelas rotas de filtragem de dados.
 - Requests:
-  * Seguindo um padrão distinto para a validação dos dados de entrada, estamos empregando uma abordagem denominada `Request Forms`, um padrão do Laravel que assume a responsabilidade de manipular os dados de entrada para cada endpoint. Além disso, esse padrão também executa a validação para garantir que não haja incompatibilidade nos dados enviados.
+  * Seguindo um padrão distinto para a validação dos dados de entrada, estamos empregando uma abordagem denominada `Request Forms`, um padrão do Laravel que assume a responsabilidade de manipular os dados de entrada para cada endpoint. Além disso, esse padrão também executa a validação para garantir que não haja incompatibilidade nos dados enviados, retornando um erro caso ocorra alguma invalidação dos dados.
 - Resources:
   * Estamos adotando um padrão consistente para as respostas da API, utilizando os recursos `(resources)` do Laravel. Esse padrão uniformiza todas as respostas da API, garantindo que cada controlador utilize esse formato padronizado para as saídas.
 - Providers:
