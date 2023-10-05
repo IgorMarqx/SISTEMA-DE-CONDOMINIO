@@ -18,7 +18,7 @@ Esta API tem como principal finalidade o gerenciamento de sistemas de condomíni
 Esta API foi desenvolvida utilizando a estrutura de pastas fornecida pelo Laravel, proporcionando uma organização exemplar. Foi utilizado a seguinte estrutura:
 
 - Repository Pattern:
-  * Na pasta `app`, você encontrará a pasta `repositories`, onde estão organizadas as respectivas subpastas contendo cada classe de repository e suas interfaces correspondentes. Todas as operações de banco de dados foram realizadas exclusivamente através desses repositórios. Os repositorys têm a responsabilidade exclusiva de executar as consultas no banco de dados.
+  * Na pasta `app`, você encontrará a pasta `repositories`, onde estão organizadas as respectivas subpastas contendo cada classe de repository e suas interfaces correspondentes. Todas as operações de banco de dados foram realizadas exclusivamente através desses repositórios. Os repositorys têm a responsabilidade exclusiva de executar apenas as consultas no banco de dados.
 - Services:
   * Nessa pasta, você encontrará todas as subpastas correspondentes contendo as validações para as operações do banco de dados. Os services englobam todas as validações, incluindo a verificação do correto preenchimento do ID do usuário para operações de exclusão e atualização.
 - Controllers:
