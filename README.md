@@ -33,7 +33,7 @@ Esta API foi desenvolvida utilizando a estrutura de pastas fornecida pelo Larave
 
 ## Primeiros passos
 <a id="getting-start"></a>
-É necessário rodar o composer para poder gerar todas as dependências necessárias:
+É necessário executar o composer para poder gerar todas as dependências necessárias:
 
 ```php
 $ composer install
