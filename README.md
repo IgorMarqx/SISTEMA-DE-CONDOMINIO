@@ -47,7 +47,7 @@ $ php artisan migrate
 
 ## Sistema de autenticação JWT
 <a id="jwt"></a>
-Esta API utiliza um sistema de autenticação chamado JWT (JSON Web Token). Para começar a usá-lo, você deve adicionar um campo à sua variável de ambiente.<br>
+Esta API utiliza um sistema de autenticação chamado JWT (JSON Web Token). Usando o comando ele criará automaticamente a variavel na env.<br>
 Para gerar seu próprio token JWT, execute o seguinte comando: `php artisan jwt:secret`.
 
 ```env
