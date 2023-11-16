@@ -21,7 +21,7 @@ class UserFilterController extends Controller
     {
         $filter = $this->userService->filterUser($user);
 
-        if(!$filter){
+        if (! $filter) {
             return new ApiResource(['error' => true, 'message' => 'Nenhum usuário encontrado'], 404);
         }
 
