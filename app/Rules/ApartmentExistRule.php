@@ -3,7 +3,6 @@
 namespace App\Rules;
 
 use App\Models\Apartment;
-use App\Models\Condominium;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
@@ -20,7 +19,7 @@ class ApartmentExistRule implements ValidationRule
     {
         $apartment = Apartment::where('id', $this->apartment_id)->exists();
 
-        if (!$apartment) {
+        if (! $apartment) {
             $fail('Condominio informado não existe.');
         }
     }
