@@ -29,18 +29,18 @@ class ApartmentService
     {
         $apartment = $this->apartmentRepository->findApartmentById($id);
 
-        if (!$apartment) {
+        if (! $apartment) {
             return null;
         }
 
         return $apartment;
     }
 
-    public function updateApartment($data, $id): bool|null
+    public function updateApartment($data, $id): ?bool
     {
         $apartment = $this->apartmentRepository->findApartmentById($id);
 
-        if (!$apartment) {
+        if (! $apartment) {
             return null;
         }
 
@@ -50,11 +50,11 @@ class ApartmentService
         ]);
     }
 
-    public function deleteApartment($id): bool|null
+    public function deleteApartment($id): ?bool
     {
         $apartment = $this->apartmentRepository->findApartmentById($id);
 
-        if (!$apartment) {
+        if (! $apartment) {
             return null;
         }
 
