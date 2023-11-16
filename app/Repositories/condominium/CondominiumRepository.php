@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class CondominiumRepository implements CondominiumRepositoryInterface
 {
-
     public function getAll(): Collection
     {
         return Condominium::all();
@@ -20,7 +19,7 @@ class CondominiumRepository implements CondominiumRepositoryInterface
         return Condominium::create([
             'name' => $data['name'],
             'address' => $data['address'],
-            'color' => $data['color']
+            'color' => $data['color'],
         ]);
     }
 
@@ -28,7 +27,6 @@ class CondominiumRepository implements CondominiumRepositoryInterface
     {
         return Condominium::with('area')->find($id);
     }
-
 
     public function updateCondominium(Condominium $condominium, $data): Condominium|null|bool
     {
