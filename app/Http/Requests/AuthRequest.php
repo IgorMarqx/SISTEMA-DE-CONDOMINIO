@@ -2,16 +2,13 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ApartmentExistRule;
-use App\Rules\CondominiumExistRule;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\JsonResponse;
 
 class AuthRequest extends FormRequest
 {
-
     public function rules(): array
     {
         return [
@@ -27,10 +24,9 @@ class AuthRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json([
             'error' => true,
-            'message' => $validator->errors()->first()
+            'message' => $validator->errors()->first(),
         ]));
     }
-
 
     public function messages(): array
     {
@@ -51,7 +47,7 @@ class AuthRequest extends FormRequest
             'condominium_id.condominium_exists' => 'Condominio informado não existe.',
 
             'apartment_id.required' => 'Escolha um apartamento.',
-            'apartment_id.apartment_exists' => 'Apartment informado não existe.'
+            'apartment_id.apartment_exists' => 'Apartment informado não existe.',
         ];
     }
 }
