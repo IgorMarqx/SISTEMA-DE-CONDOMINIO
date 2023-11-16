@@ -36,7 +36,7 @@ class ApiGarageController extends Controller
         try {
             return new ApiResource(['error' => false, 'message' => 'Garagem cadastrada com sucesso'], 201);
         } catch (Exception $e) {
-            throw new Exception('Erro: ' . $e->getMessage());
+            throw new Exception('Erro: '.$e->getMessage());
         }
     }
 
@@ -47,14 +47,14 @@ class ApiGarageController extends Controller
     {
         $garage = $this->garageService->findGarageById($id);
 
-        if(!$garage){
+        if (! $garage) {
             return new ApiResource(['error' => true, 'message' => 'Garagem não encontrada'], 404);
         }
 
         try {
             return new GarageShowResource($garage);
         } catch (Exception $e) {
-            throw new Exception('Erro ao atualizar/encontrar garagem:' . $e->getMessage());
+            throw new Exception('Erro ao atualizar/encontrar garagem:'.$e->getMessage());
         }
     }
 
@@ -65,14 +65,14 @@ class ApiGarageController extends Controller
     {
         $garage = $this->garageService->updateGarage($id, $request);
 
-        if(!$garage){
+        if (! $garage) {
             return new ApiResource(['error' => true, 'message' => 'Garagem não encontrada'], 404);
         }
 
         try {
             return new ApiResource(['error' => false, 'message' => 'Garagem atualizada com sucesso'], 200);
         } catch (Exception $e) {
-            throw new Exception('Erro ao atualizar/encontrar condominio:' . $e->getMessage());
+            throw new Exception('Erro ao atualizar/encontrar condominio:'.$e->getMessage());
         }
     }
 
@@ -83,14 +83,14 @@ class ApiGarageController extends Controller
     {
         $garage = $this->garageService->deleteGarage($id);
 
-        if (!$garage) {
+        if (! $garage) {
             return new ApiResource(['error' => true, 'message' => 'Garagem não encontrada'], 404);
         }
 
         try {
             return new ApiResource(['error' => false, 'message' => 'Garagem deletada com sucesso'], 200);
         } catch (Exception $e) {
-            throw new Exception('Erro ao deletar garagem:' . $e->getMessage());
+            throw new Exception('Erro ao deletar garagem:'.$e->getMessage());
         }
     }
 }
