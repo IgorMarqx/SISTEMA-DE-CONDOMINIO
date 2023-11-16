@@ -1,14 +1,13 @@
 <?php
 
 use App\Http\Controllers\auth\ApiAuthController;
+use App\Http\Controllers\dashboard\ApiApartmentController;
+use App\Http\Controllers\dashboard\ApiAreaController;
 use App\Http\Controllers\dashboard\ApiCondominiumController;
 use App\Http\Controllers\dashboard\ApiGarageController;
+use App\Http\Controllers\filter\CondominiumFilterController;
+use App\Http\Controllers\filter\UserFilterController;
 use App\Http\Controllers\user\ApiUserController;
-use App\Http\Controllers\dashboard\ApiAreaController;
-use App\Http\Controllers\dashboard\ApiApartmentController;
-use \App\Http\Controllers\filter\UserFilterController;
-use \App\Http\Controllers\filter\CondominiumFilterController;
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', function () {
