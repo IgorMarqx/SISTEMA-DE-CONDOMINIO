@@ -16,7 +16,7 @@ class AreaUpdateRequest extends FormRequest
             'start_time' => ['required', 'date_format:H:i:s'],
             'end_time' => ['required', 'date_format:H:i:s'],
             'allowed' => ['required', 'numeric'],
-            'condominium_id' => ['required', 'numeric', 'condominium_exists']
+            'condominium_id' => ['required', 'numeric', 'condominium_exists'],
         ];
     }
 
@@ -24,7 +24,7 @@ class AreaUpdateRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json([
             'error' => true,
-            'message' => $validator->errors()->first()
+            'message' => $validator->errors()->first(),
         ]));
     }
 }
