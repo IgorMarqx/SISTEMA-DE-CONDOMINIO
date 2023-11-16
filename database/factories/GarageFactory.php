@@ -20,7 +20,7 @@ class GarageFactory extends Factory
         $apartment = Apartment::factory()->create();
 
         return [
-            'identify' => 'GARAGE ' . fake()->numberBetween(1, 999),
+            'identify' => 'GARAGE '.fake()->numberBetween(1, 999),
             'apartment_id' => $apartment->id,
         ];
     }
