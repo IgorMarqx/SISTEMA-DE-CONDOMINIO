@@ -21,7 +21,7 @@ class Area extends Model
         'start_time',
         'end_time',
         'condominium_id',
-        'allowed'
+        'allowed',
     ];
 
     public function condominium(): belongsTo
