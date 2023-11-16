@@ -20,7 +20,7 @@ class ApartmentShowResource extends JsonResource
             'timestamp' => date('Y-m-d H:i:s'),
             'path' => $request->fullUrl(),
             'condominium_id' => $this->condominium_id,
-            'garage' => $this->garage
+            'garage' => $this->garage,
         ];
     }
 }
