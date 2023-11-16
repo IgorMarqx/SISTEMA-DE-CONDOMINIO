@@ -20,7 +20,7 @@ class CondominiumRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json([
             'error' => true,
-            'message' => $validator->errors()->first()
+            'message' => $validator->errors()->first(),
         ]));
     }
 }
