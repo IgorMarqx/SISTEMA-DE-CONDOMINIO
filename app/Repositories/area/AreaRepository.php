@@ -27,7 +27,7 @@ class AreaRepository implements AreaRepositoryInterface
             'start_time' => $data['start_time'],
             'end_time' => $data['end_time'],
             'condominium_id' => $data['condominium_id'],
-            'allowed' => 1
+            'allowed' => 1,
         ]);
     }
 
