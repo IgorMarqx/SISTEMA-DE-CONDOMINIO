@@ -17,5 +17,6 @@ interface CondominiumRepositoryInterface
     public function updateCondominium(Condominium $condominium, $data): Condominium|null|bool;
 
     public function deleteCondominium(Condominium $condominium): bool;
+
     public function filterCondominium($data): LengthAwarePaginator;
 }
