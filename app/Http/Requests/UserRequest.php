@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\JsonResponse;
 
 class UserRequest extends FormRequest
@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json([
             'error' => true,
-            'message' => $validator->errors()->first()
+            'message' => $validator->errors()->first(),
         ]));
     }
 
