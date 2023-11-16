@@ -26,7 +26,7 @@ class AreaShowResource extends JsonResource
             'updated_at' => $this->updated_at,
             'timestamp' => date('Y-m-d H:i:s'),
             'path' => $request->fullUrl(),
-            'condominium' => $this->condominium
+            'condominium' => $this->condominium,
         ];
     }
 }
