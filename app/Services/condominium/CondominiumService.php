@@ -35,33 +35,33 @@ class CondominiumService
     {
         $condominium = $this->condominiumRepository->findCondominiumById($id);
 
-        if (!$condominium) {
+        if (! $condominium) {
             return null;
         }
 
         return $this->condominiumRepository->updateCondominium($condominium, [
             'name' => $data->name,
             'address' => $data->address,
-            'color' => $data->color
+            'color' => $data->color,
         ]);
     }
 
-    public function deleteCondominium($id): bool|null
+    public function deleteCondominium($id): ?bool
     {
         $condominium = $this->condominiumRepository->findCondominiumById($id);
 
-        if (!$condominium) {
+        if (! $condominium) {
             return null;
         }
 
         return $this->condominiumRepository->deleteCondominium($condominium);
     }
 
-    public function filterCondominium($data): LengthAwarePaginator|null
+    public function filterCondominium($data): ?LengthAwarePaginator
     {
         $filter = $this->condominiumRepository->filterCondominium($data);
 
-        if($filter->isEmpty()){
+        if ($filter->isEmpty()) {
             return null;
         }
 
