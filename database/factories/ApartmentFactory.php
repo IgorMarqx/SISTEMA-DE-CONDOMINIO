@@ -21,7 +21,7 @@ class ApartmentFactory extends Factory
         $condominium = Condominium::factory()->create();
 
         return [
-            'identify' => 'APT ' . fake()->numberBetween(1, 999),
+            'identify' => 'APT '.fake()->numberBetween(1, 999),
             'condominium_id' => $condominium->id,
         ];
     }
