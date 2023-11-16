@@ -16,7 +16,7 @@ class CondominiumFilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'condominiumFilter' => ['required']
+            'condominiumFilter' => ['required'],
         ];
     }
 
@@ -25,7 +25,7 @@ class CondominiumFilterRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'error' => true,
             'condominiumFilter' => 'empty',
-            'message' => $validator->errors()->first()
+            'message' => $validator->errors()->first(),
         ]));
     }
 }
