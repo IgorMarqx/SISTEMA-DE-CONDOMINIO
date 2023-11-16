@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\apartments;
 
-use App\Rules\CondominiumExistRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -21,7 +20,7 @@ class ApartmentCreateRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json([
             'error' => true,
-            'message' => $validator->errors()->first()
+            'message' => $validator->errors()->first(),
         ], 402));
     }
 }
