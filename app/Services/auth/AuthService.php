@@ -14,7 +14,7 @@ class AuthService
         $this->authRepository = $authRepository;
     }
 
-    public function getToken($data): null|string
+    public function getToken($data): ?string
     {
         return $this->authRepository->getToken($data);
     }
