@@ -14,7 +14,7 @@ class GarageRepository implements GarageRepositoryInterface
     public function storeGarage($data): Garage
     {
         return Garage::create([
-            'identify' => 'GARAGE '. $data['identify'],
+            'identify' => 'GARAGE '.$data['identify'],
             'apartment_id' => $data['apartment_id'],
         ]);
     }
@@ -42,5 +42,4 @@ class GarageRepository implements GarageRepositoryInterface
     {
         return $garage->delete();
     }
-
 }
