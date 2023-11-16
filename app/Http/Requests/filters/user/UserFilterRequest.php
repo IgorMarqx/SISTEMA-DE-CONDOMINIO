@@ -17,7 +17,7 @@ class UserFilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'userFilter' => ['required']
+            'userFilter' => ['required'],
         ];
     }
 
@@ -26,14 +26,14 @@ class UserFilterRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'error' => true,
             'userFilter' => 'empty',
-            'message' => $validator->errors()->first()
+            'message' => $validator->errors()->first(),
         ]));
     }
 
     public function messages()
     {
         return [
-            'userFilter.required' => 'Informe alguma coisa no filtro para a pesquisa ser feita.'
+            'userFilter.required' => 'Informe alguma coisa no filtro para a pesquisa ser feita.',
         ];
     }
 }
