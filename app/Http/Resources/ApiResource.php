@@ -9,6 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ApiResource extends JsonResource
 {
     protected array $data;
+
     protected int $httpCode;
 
     public function __construct(array $data, $httpCode)
@@ -23,7 +24,7 @@ class ApiResource extends JsonResource
     {
         return [
             'error' => $this->data['error'],
-            'message' => $this->data['message'] . '.',
+            'message' => $this->data['message'].'.',
             'timestamp' => date('Y-m-d H:i:s'),
             'path' => $request->fullUrl(),
         ];
