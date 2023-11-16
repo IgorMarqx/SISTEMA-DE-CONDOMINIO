@@ -13,11 +13,11 @@ class TokenResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-
     protected int $httpCode;
+
     protected string $token;
 
-    public function __construct(string $token,int $httpCode)
+    public function __construct(string $token, int $httpCode)
     {
         parent::__construct($httpCode);
         $this->httpCode = $httpCode;
