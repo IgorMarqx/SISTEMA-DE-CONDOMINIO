@@ -19,7 +19,7 @@ class ApiAuthenticate
         try {
             $user = JWTAuth::parseToken()->authenticate();
 
-            if (!$user) {
+            if (! $user) {
                 return redirect()->route('api.unauthorized');
             }
         } catch (\Exception $e) {
