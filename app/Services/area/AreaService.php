@@ -34,7 +34,7 @@ class AreaService
     {
         $area = $this->areaRepository->findAreaById($id);
 
-        if (!$area) {
+        if (! $area) {
             return false;
         }
 
@@ -44,19 +44,18 @@ class AreaService
             'start_time' => $data->start_time,
             'end_time' => $data->end_time,
             'condominium_id' => $data->condominium_id,
-            'allowed' => $data->allowed
+            'allowed' => $data->allowed,
         ]);
     }
 
-    public function deleteArea($id): null|bool
+    public function deleteArea($id): ?bool
     {
         $area = $this->areaRepository->findAreaById($id);
 
-        if (!$area) {
+        if (! $area) {
             return null;
         }
 
         return $this->areaRepository->deleteArea($area);
     }
-
 }
