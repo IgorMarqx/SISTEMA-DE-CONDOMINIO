@@ -10,7 +10,6 @@ use Illuminate\Http\JsonResponse;
 
 class GarageRequest extends FormRequest
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,7 +27,7 @@ class GarageRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json([
             'error' => true,
-            'message' => $validator->errors()->first()
+            'message' => $validator->errors()->first(),
         ]));
     }
 }
