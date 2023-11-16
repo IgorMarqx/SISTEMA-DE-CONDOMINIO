@@ -40,7 +40,7 @@ class GarageService
     {
         $garage = $this->garageRepository->findGarageById($id);
 
-        if (!$garage) {
+        if (! $garage) {
             return null;
         }
 
@@ -57,7 +57,7 @@ class GarageService
     {
         $garage = $this->garageRepository->findGarageById($id);
 
-        if(!$garage){
+        if (! $garage) {
             return null;
         }
 
