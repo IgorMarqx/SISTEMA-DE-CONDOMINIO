@@ -20,7 +20,7 @@ class ApartmentRepository implements ApartmentRepositoryInterface
     /**
      * @throws Exception
      */
-    public function storeApartment($data): Apartment|null
+    public function storeApartment($data): ?Apartment
     {
         return Apartment::create([
             'identify' => $data['identify'],
@@ -40,7 +40,7 @@ class ApartmentRepository implements ApartmentRepositoryInterface
     /**
      * @throws Exception
      */
-    public function updateApartment(Apartment $apartment, $data): bool|null
+    public function updateApartment(Apartment $apartment, $data): ?bool
     {
         return $apartment->update();
     }
@@ -48,7 +48,7 @@ class ApartmentRepository implements ApartmentRepositoryInterface
     /**
      * @throws Exception
      */
-    public function deleteApartment(Apartment $apartment): bool|null
+    public function deleteApartment(Apartment $apartment): ?bool
     {
         DB::transaction(function () use ($apartment) {
             $apartment->load('garage');
@@ -59,6 +59,7 @@ class ApartmentRepository implements ApartmentRepositoryInterface
 
             $apartment->delete();
         });
+
         return true;
     }
 }
