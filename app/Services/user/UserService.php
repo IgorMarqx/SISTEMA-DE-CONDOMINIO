@@ -27,7 +27,7 @@ class UserService
         try {
             return $this->userRepository->getAll();
         } catch (Exception $e) {
-            throw new Exception("Erro: " . $e->getMessage());
+            throw new Exception('Erro: '.$e->getMessage());
         }
     }
 
@@ -41,7 +41,7 @@ class UserService
         try {
             return new ApiResource(['error' => false, 'message' => 'Usuário criado com sucesso'], 201);
         } catch (Exception $e) {
-            throw new Exception('Erro: ' . $e->getMessage());
+            throw new Exception('Erro: '.$e->getMessage());
         }
     }
 
@@ -85,14 +85,14 @@ class UserService
     {
         $user = $this->userRepository->findUserById($id);
 
-        if (!$user) {
+        if (! $user) {
             return null;
         }
 
         return $this->userRepository->destroyUser($user);
     }
 
-    public function filterUser($user): LengthAwarePaginator|null
+    public function filterUser($user): ?LengthAwarePaginator
     {
         $filter = $this->userRepository->filterUser($user);
 
