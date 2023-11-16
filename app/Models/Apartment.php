@@ -14,7 +14,7 @@ class Apartment extends Model
 
     protected $fillable = [
         'identify',
-        'condominium_id'
+        'condominium_id',
     ];
 
     public function condominium(): BelongsTo
