@@ -17,9 +17,9 @@ class ApartmentUpdateRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw  new HttpResponseException(response()->json([
+        throw new HttpResponseException(response()->json([
             'error' => true,
-            'message' => $validator->errors()->first()
+            'message' => $validator->errors()->first(),
         ]));
     }
 }
