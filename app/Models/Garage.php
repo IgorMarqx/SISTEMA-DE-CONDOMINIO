@@ -12,7 +12,7 @@ class Garage extends Model
 
     protected $fillable = [
         'identify',
-        'apartment_id'
+        'apartment_id',
     ];
 
     public function apartment(): BelongsTo
