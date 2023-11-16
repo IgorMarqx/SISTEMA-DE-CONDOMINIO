@@ -21,7 +21,7 @@ class CondominiumFilterController extends Controller
     {
         $filter = $this->condominiumService->filterCondominium($request);
 
-        if (!$filter) {
+        if (! $filter) {
             return new ApiResource(['error' => true, 'message' => 'Nenhum condomínio encontrado'], 404);
         }
 
