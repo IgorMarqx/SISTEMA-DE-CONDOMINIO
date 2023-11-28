@@ -23,4 +23,9 @@ class AuthService
     {
         return $this->authRepository->registerUser($data);
     }
+
+    public function verifyToken($data): User|string
+    {
+        return $this->authRepository->verifyToken($data);
+    }
 }
