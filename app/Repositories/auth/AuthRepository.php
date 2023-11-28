@@ -3,6 +3,7 @@
 namespace App\Repositories\auth;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -10,10 +11,16 @@ class AuthRepository implements AuthRepositoryInterface
 {
     public function getToken($data): string
     {
-        return Auth::attempt([
+        $token = Auth::attempt([
             'email' => $data['email'],
             'password' => $data['password'],
         ]);
+
+        \auth()->user()->update([
+            'token' => $token,
+        ]);
+
+        return $token;
     }
 
     public function registerUser($data): User
@@ -24,5 +31,10 @@ class AuthRepository implements AuthRepositoryInterface
             'password' => Hash::make($data['password']),
             'condominium_id' => $data['condominium_id'],
         ]);
+    }
+
+    public function verifyToken($data): Collection
+    {
+        return User::where('token', $data['token'])->get();
     }
 }
