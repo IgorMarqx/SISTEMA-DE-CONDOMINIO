@@ -26,6 +26,8 @@ Route::middleware(['api.auth'])->group(function () {
     Route::get('/filter/users', [UserFilterController::class, 'filterUser']);
     Route::get('/filter/condominium', [CondominiumFilterController::class, 'filterCondominium']);
 
+    Route::post('getToken', [ApiAuthController::class, 'verifyToken']);
+
     Route::apiResources([
         'users' => ApiUserController::class,
         'condominium' => ApiCondominiumController::class,
