@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\auth\TokenRequest;
 use App\Http\Requests\AuthRequest;
 use App\Http\Resources\ApiResource;
 use App\Http\Resources\auth\TokenResource;
@@ -50,5 +51,20 @@ class ApiAuthController extends Controller
             throw new Exception('Erro ao criar usuário: ', $e->getMessage());
         }
 
+    }
+
+    public function verifyToken(TokenRequest $request): ApiResource
+    {
+        $token = $this->authService->verifyToken($request);
+
+        if (!$token) {
+            return new ApiResource(['error' => true, 'message' => 'Token inválido!'], 401);
+        }
+
+        try {
+            return new ApiResource(['error' => false, 'message' => 'Token válido!'], 200);
+        }catch (Exception $e){
+            throw new Exception('Erro ao verificar token: ', $e->getMessage());
+        }
     }
 }
