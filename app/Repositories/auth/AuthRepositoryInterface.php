@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface AuthRepositoryInterface
 {
-    public function getToken($data): string;
+    public function getToken($data): string|null;
     public function registerUser($data): User;
     public function verifyToken($data): Collection;
 }
