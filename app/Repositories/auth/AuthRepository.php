@@ -9,12 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthRepository implements AuthRepositoryInterface
 {
-    public function getToken($data): string
+    public function getToken($data): string|null
     {
         $token = Auth::attempt([
             'email' => $data['email'],
             'password' => $data['password'],
         ]);
+
+        if(!$token){
+            return null;
+        }
 
         \auth()->user()->update([
             'token' => $token,
