@@ -14,8 +14,7 @@ class AuthRequest extends FormRequest
         return [
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'confirmed', 'min:5'],
-            'password_confirmation' => ['min:5'],
+            'password' => ['required','min:5'],
             'condominium_id' => ['required', 'numeric', 'condominium_exists'],
         ];
     }
