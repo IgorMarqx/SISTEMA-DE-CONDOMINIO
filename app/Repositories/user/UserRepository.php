@@ -16,7 +16,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function getAll(): Collection
     {
-        return User::all();
+        return User::select('id','name','email','created_at')->get();
     }
 
     /**
