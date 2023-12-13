@@ -20,9 +20,10 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'token' => Str::random(10),
+            'condominium_id' => \App\Models\Condominium::factory(),
             'email_verified_at' => now(),
             'password' => '$2y$10$5/o9nkhdBZ2.Wy0yw9rI3uAMBYcED3GJNy5Icez6z5.BaluA9SuLK', // password
-            'condominium_id' => 1,
             'remember_token' => Str::random(10),
         ];
     }
