@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('apartment_id');
             $table->timestamps();
 
-            $table->foreign('apartment_id')->references('id')->on('apartment')->cascadeOnDelete();
+            $table->foreign('apartment_id')->references('id')->on('apartments');
         });
     }
 
